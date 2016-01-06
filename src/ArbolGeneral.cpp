@@ -1,5 +1,5 @@
 // Esta línea es para que el editor me muestre errores sin compilar
-//#include "../include/ArbolGeneral.h"
+#include "../include/ArbolGeneral.h"
 
 template <class T>
 void ArbolGeneral<T>::destruir(nodo * n){
@@ -79,6 +79,46 @@ ArbolGeneral<T>::~ArbolGeneral(){
 
 template <class T>
 ArbolGeneral<T>& ArbolGeneral<T>::operator=(const ArbolGeneral<T> &v){
+  if(this != &v){
   destruir(laraiz);
   copiar(laraiz,v.laraiz);
+  }
+}
+
+template <class T>
+void ArbolGeneral<T>::AsignaRaiz(const T& e){
+  ArbolGeneral<T> nuevo(e);
+  *this = nuevo;
+}
+
+typedef struct nodo * Nodo;
+
+template <class T>
+typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::raiz() const{
+  return laraiz;
+}
+
+template <class T>
+typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::hijomasizquierda(const typename ArbolGeneral<T>::Nodo n) const{
+  return n->izqda;
+}
+
+template <class T>
+typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::hermanoderecha(const typename ArbolGeneral<T>::Nodo n) const{
+  return n->drcha;
+}
+
+template <class T>
+typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::padre(const typename ArbolGeneral<T>::Nodo n) const{
+  return n->padre;
+}
+
+template <class T>
+T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n){
+  return n->etiqueta;
+}
+
+template <class T>
+const T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n) const{
+  return n->etiqueta;
 }
