@@ -15,11 +15,32 @@ void ArbolGeneral<T>::destruir(nodo * n){
   }
 }
 
-// Es importante ver que en \e dest->padre (si existe)
-// no se asigna ningún valor, pues no se conoce.
 template <class T>
 void ArbolGeneral<T>::copiar(nodo *& dest, nodo * orig){
-  //Por hacer
+  destruir(dest);
+
+  if(orig == 0)
+    dest = 0;
+  else{
+    dest = new ArbolGeneral<T>::nodo;
+    dest->etiqueta = orig->etiqueta;
+    nodo *dest_hijo = dest->izqda;
+    nodo *orig_hijo = orig->izqda;
+
+    do{
+      copiar(dest_hijo, orig_hijo);
+
+      if(dest_hijo != 0){
+        dest_hijo->padre = dest;
+        dest_hijo = dest_hijo->drcha;
+      }
+
+      if(orig_hijo != 0)
+        orig_hijo = orig_hijo->drcha;
+
+    } while(orig_hijo != 0);
+  }
+
 }
 
 template <class T>
@@ -75,7 +96,7 @@ ArbolGeneral<T>::ArbolGeneral(const T& e){
 
 template <class T>
 ArbolGeneral<T>::ArbolGeneral (const ArbolGeneral<T>& v){
-  copiar(laraiz, v.laraiz);
+  copiar(laraiz, v.raiz());
 }
 
 template <class T>
@@ -134,29 +155,34 @@ void ArbolGeneral<T>::asignar_subarbol(const ArbolGeneral<T>& orig, const typena
  orig.copiar(laraiz,nod); // laraiz se destruye en copiar
 }
 
-//TODO: padre de dest debería ser nulo?
 template <class T>
 void ArbolGeneral<T>::podar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& dest){
   dest = n->izqda;
   n->izqda = n->izqda->drcha;
 }
 
-//TODO: padre de dest debería ser nulo?
 template <class T>
 void ArbolGeneral<T>::podar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& dest){
   dest = n->drcha;
   n->drcha = n->drcha->drcha;
 }
 
+// ¿Debería hacerse copiando o así está bien?
 template <class T>
 void ArbolGeneral<T>::insertar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
-  //TODO: Por hacer
+  rama.laraiz->drcha = n->izqda->drcha;
+  rama.laraiz->padre = n;
+  n->izqda = rama.laraiz;
+  rama.laraiz = 0;
 }
 
-
+// ¿Debería hacerse copiando o así está bien?
 template <class T>
 void ArbolGeneral<T>::insertar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
-  //TODO: Por hacer
+  rama.laraiz->drcha = n->drcha;
+  rama.laraiz->padre = n->padre;
+  n->drcha           = rama.laraiz;
+  rama.laraiz = 0;
 }
 
 template <class T>
