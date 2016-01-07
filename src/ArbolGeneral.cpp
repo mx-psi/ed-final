@@ -1,5 +1,3 @@
-#include "../include/ArbolGeneral.h"
-
 template <class T>
 void ArbolGeneral<T>::destruir(nodo * n){
   if(n != 0){

@@ -583,8 +583,6 @@ class ArbolGeneral{
 
 };
 
-//#include "ArbolGeneral.cpp"
-
-
+#include "ArbolGeneral.cpp"
 
 #endif
