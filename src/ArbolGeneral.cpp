@@ -162,6 +162,7 @@ void ArbolGeneral<T>::insertar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, 
 template <class T>
 void ArbolGeneral<T>::clear(){
   destruir(laraiz);
+  laraiz = 0;
 }
 
 template <class T>
