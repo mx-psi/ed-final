@@ -1,4 +1,3 @@
-// Esta línea es para que el editor me muestre errores sin compilar
 #include "../include/ArbolGeneral.h"
 
 template <class T>
@@ -16,7 +15,12 @@ void ArbolGeneral<T>::destruir(nodo * n){
   }
 }
 
-// Falta copiar
+// Es importante ver que en \e dest->padre (si existe)
+// no se asigna ningún valor, pues no se conoce.
+template <class T>
+void ArbolGeneral<T>::copiar(nodo *& dest, nodo * orig){
+  //Por hacer
+}
 
 template <class T>
 int ArbolGeneral<T>::contar(const nodo * n) const{
@@ -125,7 +129,35 @@ const T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n) const
   return n->etiqueta;
 }
 
-// Faltan métodos aquí
+template <class T>
+void ArbolGeneral<T>::asignar_subarbol(const ArbolGeneral<T>& orig, const typename ArbolGeneral<T>::Nodo nod){
+ orig.copiar(laraiz,nod); // laraiz se destruye en copiar
+}
+
+//TODO: padre de dest debería ser nulo?
+template <class T>
+void ArbolGeneral<T>::podar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& dest){
+  dest = n->izqda;
+  n->izqda = n->izqda->drcha;
+}
+
+//TODO: padre de dest debería ser nulo?
+template <class T>
+void ArbolGeneral<T>::podar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& dest){
+  dest = n->drcha;
+  n->drcha = n->drcha->drcha;
+}
+
+template <class T>
+void ArbolGeneral<T>::insertar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
+  //TODO: Por hacer
+}
+
+
+template <class T>
+void ArbolGeneral<T>::insertar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
+  //TODO: Por hacer
+}
 
 template <class T>
 void ArbolGeneral<T>::clear(){
