@@ -16,6 +16,8 @@ void ArbolGeneral<T>::destruir(nodo * n){
   }
 }
 
+// Falta copiar
+
 template <class T>
 int ArbolGeneral<T>::contar(const nodo * n) const{
   if(n == 0)
@@ -121,4 +123,31 @@ T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n){
 template <class T>
 const T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n) const{
   return n->etiqueta;
+}
+
+// Faltan métodos aquí
+
+template <class T>
+void ArbolGeneral<T>::clear(){
+  destruir(laraiz);
+}
+
+template <class T>
+int ArbolGeneral<T>::size() const{
+  return contar(laraiz);
+}
+
+template <class T>
+bool ArbolGeneral<T>::empty() const{
+  return laraiz == 0;
+}
+
+template <class T>
+bool ArbolGeneral<T>::operator==(const ArbolGeneral<T>& v) const{
+  return soniguales(laraiz, v.laraiz);
+}
+
+template <class T>
+bool ArbolGeneral<T>::operator!=(const ArbolGeneral<T>& v) const{
+  return !soniguales(laraiz, v.laraiz);
 }
