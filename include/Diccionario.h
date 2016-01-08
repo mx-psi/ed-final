@@ -16,7 +16,6 @@ struct info{
 class Diccionario{
   ArbolGeneral<info> datos;
 public:
-  Diccionario():datos(){}
   int size() const;
   vector<string> PalabrasLongitud(int longitud);
   bool Esta(string palabra);
