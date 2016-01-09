@@ -208,3 +208,97 @@ template <class T>
 bool ArbolGeneral<T>::operator!=(const ArbolGeneral<T>& v) const{
   return !soniguales(laraiz, v.laraiz);
 }
+
+
+/* Iterador preorden no constante */
+
+template <class T>
+ArbolGeneral<T>::iter_preorden::iter_preorden():it(0),raiz(laraiz),level(-1){}
+
+template <class T>
+T & ArbolGeneral<T>::iter_preorden::operator*(){
+  return it->etiqueta;
+}
+
+template <class T>
+int ArbolGeneral<T>::iter_preorden::getlevel() const{
+  return level;
+}
+
+
+//TODO
+template <class T>
+ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operator ++(){}
+
+template <class T>
+bool ArbolGeneral<T>::iter_preorden::operator == (const ArbolGeneral<T>::iter_preorden &i){
+  return raiz == i.raiz && it == i.it;
+}
+
+template <class T>
+bool ArbolGeneral<T>::iter_preorden::operator != (const ArbolGeneral<T>::iter_preorden &i){
+  return raiz != i.raiz || it != i.it;
+}
+
+/* Iterador preorden constante */
+
+template <class T>
+ArbolGeneral<T>::const_iter_preorden::const_iter_preorden():it(0),raiz(laraiz),level(-1){}
+
+template <class T>
+const T & ArbolGeneral<T>::const_iter_preorden::operator*(){
+  return it->etiqueta;
+}
+
+template <class T>
+int ArbolGeneral<T>::const_iter_preorden::getlevel()const{
+  return level;
+}
+
+//TODO
+template <class T>
+ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preorden::operator ++(){
+
+}
+
+template <class T>
+bool ArbolGeneral<T>::const_iter_preorden::operator == (const ArbolGeneral<T>::const_iter_preorden &i){
+  return raiz == i.raiz && it == i.it;
+}
+
+template <class T>
+bool ArbolGeneral<T>::const_iter_preorden::operator != (const ArbolGeneral<T>::const_iter_preorden &i){
+  return raiz != i.raiz || it != i.it;
+}
+
+/* Begin y end */
+
+template <class T>
+ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::begin(){
+  iter_preorden it;
+  it.it = laraiz;
+  it.raiz = laraiz;
+  it.level = 0;
+  return it;
+}
+
+template <class T>
+ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::begin()const{
+  const_iter_preorden it;
+  it.it = laraiz;
+  it.raiz = laraiz;
+  it.level = 0;
+  return it;
+}
+
+template <class T>
+ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::end(){
+  iter_preorden it;
+  return it;
+}
+
+template <class T>
+ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::end() const{
+  const_iter_preorden it;
+  return it;
+}
