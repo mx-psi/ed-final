@@ -225,10 +225,22 @@ int ArbolGeneral<T>::iter_preorden::getlevel() const{
   return level;
 }
 
-
-//TODO
 template <class T>
-ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operator ++(){}
+ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operator ++(){
+  if (it->izqda != 0)
+    it = it->izqda;
+  else if (it->drcha != 0)
+    it = it->drcha;
+
+  else {
+    while (it->padre != 0 && it->drcha(it->padre) == 0)
+      it = it->padre;
+    if (it->padre == 0)
+      it = 0;
+    else
+      it = it->drcha(it->padre);
+  }
+}
 
 template <class T>
 bool ArbolGeneral<T>::iter_preorden::operator == (const ArbolGeneral<T>::iter_preorden &i){
