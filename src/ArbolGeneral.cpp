@@ -240,6 +240,7 @@ ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operator ++(){
     else
       it = it->drcha(it->padre);
   }
+  return *this;
 }
 
 template <class T>
@@ -282,6 +283,7 @@ ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preorden::ope
     else
       it = it->drcha(it->padre);
   }
+  return *this;
 }
 
 template <class T>
