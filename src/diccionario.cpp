@@ -1,4 +1,4 @@
-#include "../include/diccionario.h"
+#include "../include/diccionario.h" // Ya lo quitaré
 
 int Diccionario::size() const{
   int n = 0;
@@ -14,33 +14,67 @@ int Diccionario::size() const{
 vector<string> Diccionario::PalabrasLongitud(int longitud){
 }
 
-bool Diccionario::Esta(string palabra){
-}
-
 istream & operator>>(istream & is, Diccionario & D){
 
 }
 */
+
+bool Diccionario::Esta(string palabra){
+  if(datos.raiz() == 0)
+    return false;
+
+  Nodo n = datos.hijomasizquierda(datos.raiz());
+  int pos = 0;
+
+  // Avanza por el árbol hasta la última letra
+  while((pos < palabra.length() - 1) && n != 0){
+    if(palabra[pos] == n->c){
+      pos++;
+      n = datos.hijomasizquierda(n);
+    }
+    else
+      n = datos.hermanoderecha(n);
+  }
+
+  // Comprueba que la última letra sea final
+  while(n != 0){
+    if(palabra[pos] == n->c && n->final)
+      return true;
+    n = datos.hermanoderecha(n);
+  }
+
+  // n == 0
+  return false;
+}
 
 ostream & operator<<(ostream & os, Diccionario & D){
   for(Diccionario::const_iterator it = begin(); it != end(); it++)
     os << it->cad << "\n";
 }
 
-//TODO: No sé si las comparaciones con 0 son válidas.
+//TODO: ¿Es más eficiente usando la pila o no hace falta?
+void Diccionario::iterator::ConstruyeCadena(){
+  ArbolGeneral<info>::iter_preorden p;
+  stack<char> st;
+
+  for(p = it; p != 0; p = datos.padre(p))
+    st.push(p->c);
+
+  cad.clear();
+  while(!st.empty()){
+    cad.push_back(st.top());
+    st.pop();
+  }
+}
+
 iterator& Diccionario::iterator::operator++(){
-  // Avanza hasta la siguiente palabra válida
   while(it != 0 && !(it->final))
     it++;
 
-  // Si es caracter final, construye la cadena
-  ArbolGeneral<info>::iter_preorden p = it.it;
-  it.cad = "";
-
-  while(p != 0){
-    it.cad = p->c + it.cad;
-    p = p->padre;
-  }
+  if(it->final)
+    it.ConstruyeCadena();
+  else
+    it.cad = "";
 
   return *this;
 }
@@ -56,7 +90,8 @@ bool Diccionario::iterator::operator!=(const iterator &i){
 iterator Diccionario::begin(){
   iterator beg;
   beg.it = datos.begin();
-  beg++; //Avanza hasta la primera palabra válida
+  if(beg != end())
+    beg++; //Avanza hasta la primera palabra válida
   return beg;
 }
 

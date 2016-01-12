@@ -3,6 +3,7 @@
 
 #include "ArbolGeneral.h"
 #include <vector>
+#include <stack>
 #include <string>
 using namespace std;
 
@@ -86,12 +87,20 @@ public:
       * @brief Cadena formada por los caracteres del recorrido a la raiz
       */
     string cad;
+
+    /**
+      * @brief Constuye la cadena del iterador
+      */
+    void ConstruyeCadena();
   public:
 
     /**
       * @brief Constructor por defecto del iterador
       */
     iterator(){}
+
+    //TODO: Para que funcione la comparación con 0
+    iterator(ArbolGeneral<info>::iter_preorden it);
 
     /**
       * @brief Operador de acceso
