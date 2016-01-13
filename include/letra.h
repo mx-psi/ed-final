@@ -13,12 +13,36 @@ struct letra{
 
   letra():l('\0'),n(0),puntos(-1){}
   letra(char let, int cant, int p):l(let),n(cant),puntos(p){}
+
+  bool operator<(const letra& otra) const {
+    return l < otra.l;
+  }
+
+  bool operator>(const letra& otra) const {
+    return l > otra.l;
+  }
+
+  bool operator==(const letra& otra) const {
+    return l == otra.l;
+  }
+  bool operator!=(const letra& otra) const {
+    return l != otra.l;
+  }
 };
 
 class Conjunto_Letras{
   set<letra> letras;
 
 public:
+  /**
+  * @brief Obtiene el iterador a una letra
+  */
+  iterator Encuentra(char c);
+
+  /**
+  * @brief Obtiene el iterador constante a una letra
+  */
+  const_iterator Encuentra(char c) const;
 
   /**
   * @brief Operador de lectura
