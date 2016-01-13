@@ -472,6 +472,8 @@ class ArbolGeneral{
 	  * */
 	 iter_preorden();
 
+   iter_preorden(Nodo n):it(n),raiz(0),level(-1){}
+
 	 /**
 	  * @brief Obtiene la etiqueta del nodo
 	  *

@@ -1,7 +1,7 @@
 template <class T>
 void ArbolGeneral<T>::destruir(nodo * n){
   if(n != 0){
-    nodo* a_borrar = n->izqda, sig;
+    nodo *a_borrar = n->izqda, *sig;
 
     while(a_borrar != 0){
       sig = a_borrar->drcha;
@@ -213,7 +213,7 @@ bool ArbolGeneral<T>::operator!=(const ArbolGeneral<T>& v) const{
 /* Iterador preorden no constante */
 
 template <class T>
-ArbolGeneral<T>::iter_preorden::iter_preorden():it(0),raiz(laraiz),level(-1){}
+ArbolGeneral<T>::iter_preorden::iter_preorden():it(0),raiz(0),level(-1){}
 
 template <class T>
 T & ArbolGeneral<T>::iter_preorden::operator*(){
@@ -226,37 +226,41 @@ int ArbolGeneral<T>::iter_preorden::getlevel() const{
 }
 
 template <class T>
-ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operator ++(){
-  if (it->izqda != 0)
+typename ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operator ++(){
+  if (it->izqda != 0){
     it = it->izqda;
+    level++;
+  }
   else if (it->drcha != 0)
     it = it->drcha;
 
   else {
-    while (it->padre != 0 && it->drcha(it->padre) == 0)
+    while (it->padre != 0 && it->padre->drcha == 0){
       it = it->padre;
+      level--;
+    }
     if (it->padre == 0)
       it = 0;
     else
-      it = it->drcha(it->padre);
+      it = it->padre->drcha;
   }
   return *this;
 }
 
 template <class T>
-bool ArbolGeneral<T>::iter_preorden::operator == (const ArbolGeneral<T>::iter_preorden &i){
+bool ArbolGeneral<T>::iter_preorden::operator==(const typename ArbolGeneral<T>::iter_preorden &i){
   return raiz == i.raiz && it == i.it;
 }
 
 template <class T>
-bool ArbolGeneral<T>::iter_preorden::operator != (const ArbolGeneral<T>::iter_preorden &i){
+bool ArbolGeneral<T>::iter_preorden::operator!=(const typename ArbolGeneral<T>::iter_preorden &i){
   return raiz != i.raiz || it != i.it;
 }
 
 /* Iterador preorden constante */
 
 template <class T>
-ArbolGeneral<T>::const_iter_preorden::const_iter_preorden():it(0),raiz(laraiz),level(-1){}
+ArbolGeneral<T>::const_iter_preorden::const_iter_preorden():it(0),raiz(0),level(-1){}
 
 template <class T>
 const T & ArbolGeneral<T>::const_iter_preorden::operator*(){
@@ -269,7 +273,7 @@ int ArbolGeneral<T>::const_iter_preorden::getlevel()const{
 }
 
 template <class T>
-ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preorden::operator ++(){
+typename ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preorden::operator ++(){
   if (it->izqda != 0){
     it = it->izqda;
     level++;
@@ -278,32 +282,32 @@ ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preorden::ope
     it = it->drcha;
 
   else {
-    while (it->padre != 0 && it->drcha(it->padre) == 0){
+    while (it->padre != 0 && it->padre->drcha == 0){
       it = it->padre;
       level--;
     }
     if (it->padre == 0)
       it = 0;
     else
-      it = it->drcha(it->padre);
+      it = it->padre->drcha;
   }
   return *this;
 }
 
 template <class T>
-bool ArbolGeneral<T>::const_iter_preorden::operator == (const ArbolGeneral<T>::const_iter_preorden &i){
+bool ArbolGeneral<T>::const_iter_preorden::operator==(const typename ArbolGeneral<T>::const_iter_preorden &i){
   return raiz == i.raiz && it == i.it;
 }
 
 template <class T>
-bool ArbolGeneral<T>::const_iter_preorden::operator != (const ArbolGeneral<T>::const_iter_preorden &i){
+bool ArbolGeneral<T>::const_iter_preorden::operator!=(const typename ArbolGeneral<T>::const_iter_preorden &i){
   return raiz != i.raiz || it != i.it;
 }
 
 /* Begin y end */
 
 template <class T>
-ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::begin(){
+typename ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::begin(){
   iter_preorden it;
   it.it = laraiz;
   it.raiz = laraiz;
@@ -312,7 +316,7 @@ ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::begin(){
 }
 
 template <class T>
-ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::begin()const{
+typename ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::begin()const{
   const_iter_preorden it;
   it.it = laraiz;
   it.raiz = laraiz;
@@ -321,13 +325,13 @@ ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::begin()const{
 }
 
 template <class T>
-ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::end(){
+typename ArbolGeneral<T>::iter_preorden ArbolGeneral<T>::end(){
   iter_preorden it;
   return it;
 }
 
 template <class T>
-ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::end() const{
+typename ArbolGeneral<T>::const_iter_preorden ArbolGeneral<T>::end() const{
   const_iter_preorden it;
   return it;
 }

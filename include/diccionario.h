@@ -3,7 +3,6 @@
 
 #include "ArbolGeneral.h"
 #include <vector>
-#include <stack>
 #include <string>
 using namespace std;
 
@@ -51,7 +50,7 @@ public:
     * @pre longitud es un entero positivo
     * @return vector con las palabras de longitud `longitud`
     */
-  vector<string> PalabrasLongitud(int longitud) const;
+  vector<string> PalabrasLongitud(int longitud);
 
   /**
     * @brief Indica si una palabra está en el diccionario
@@ -146,5 +145,7 @@ public:
     */
   iterator end();
 };
+
+#include "diccionario.cpp"
 
 #endif
