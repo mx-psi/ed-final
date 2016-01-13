@@ -3,7 +3,6 @@
 
 #include "ArbolGeneral.h"
 #include <vector>
-#include <stack>
 #include <string>
 using namespace std;
 
@@ -58,7 +57,13 @@ public:
     * @param palabra: La palabra a comprobar
     * @return Si la palabra está en el diccionario
     */
-  bool Esta(string palabra);
+  bool Esta(string palabra) const;
+
+  /**
+    * @brief Inserta una palabra en el diccionario
+    * @param palabra: Palabra a insertar
+    */
+  void Insertar(string palabra);
 
   /**
     * @brief Lee a un flujo de entrada un diccionario
@@ -88,19 +93,12 @@ public:
       */
     string cad;
 
-    /**
-      * @brief Constuye la cadena del iterador
-      */
-    void ConstruyeCadena();
   public:
 
     /**
       * @brief Constructor por defecto del iterador
       */
     iterator(){}
-
-    //TODO: Para que funcione la comparación con 0
-    iterator(ArbolGeneral<info>::iter_preorden it);
 
     /**
       * @brief Operador de acceso
@@ -147,5 +145,7 @@ public:
     */
   iterator end();
 };
+
+#include "diccionario.cpp"
 
 #endif

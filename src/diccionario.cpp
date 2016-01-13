@@ -1,34 +1,54 @@
-#include "../include/diccionario.h" // Ya lo quitaré
-
 int Diccionario::size() const{
   int n = 0;
-
-  for(Diccionario::const_iterator it = begin(); it != end(); it++)
-    if(it->final)
+  for(ArbolGeneral<info>::const_iter_preorden it = datos.begin(); it != datos.end(); ++it)
+    if((*it).final)
       n++;
-
   return n;
 }
 
 /* TODO:
-vector<string> Diccionario::PalabrasLongitud(int longitud){
-}
-
-istream & operator>>(istream & is, Diccionario & D){
-
+vector<string> Diccionario::PalabrasLongitud(int longitud) const{
 }
 */
 
-bool Diccionario::Esta(string palabra){
+void Diccionario::Insertar(string palabra){
+  ArbolGeneral<info>::Nodo n = datos.raiz(), ant;
+
+  for(unsigned i = 0; i < palabra.length(); ++i){
+    for(n = datos.hijomasizquierda(n); n != 0; ant = n, n = datos.hermanoderecha(n))
+      if(datos.etiqueta(n).c == palabra[i])
+        break;
+
+    if(n == 0){
+      info c(palabra[i],i == palabra.length() -1);
+      ArbolGeneral<info> a(c);
+      datos.insertar_hermanoderecha(ant,a);
+      n = datos.hermanoderecha(ant);
+    }
+  }
+}
+
+istream & operator>>(istream & is, Diccionario & D){
+  string palabra;
+
+  while(is.good()){
+    getline(is, palabra);
+    D.Insertar(palabra);
+  }
+
+  return is;
+}
+
+bool Diccionario::Esta(string palabra) const{
   if(datos.raiz() == 0)
     return false;
 
-  Nodo n = datos.hijomasizquierda(datos.raiz());
+  ArbolGeneral<info>::Nodo n = datos.hijomasizquierda(datos.raiz());
   int pos = 0;
 
   // Avanza por el árbol hasta la última letra
-  while((pos < palabra.length() - 1) && n != 0){
-    if(palabra[pos] == n->c){
+  while((pos < palabra.size() - 1) && n != 0){
+    if(palabra[pos] == datos.etiqueta(n).c){
       pos++;
       n = datos.hijomasizquierda(n);
     }
@@ -38,7 +58,7 @@ bool Diccionario::Esta(string palabra){
 
   // Comprueba que la última letra sea final
   while(n != 0){
-    if(palabra[pos] == n->c && n->final)
+    if(palabra[pos] == datos.etiqueta(n).c && datos.etiqueta(n).final)
       return true;
     n = datos.hermanoderecha(n);
   }
@@ -47,57 +67,55 @@ bool Diccionario::Esta(string palabra){
   return false;
 }
 
-ostream & operator<<(ostream & os, Diccionario & D){
-  for(Diccionario::const_iterator it = begin(); it != end(); it++)
-    os << it->cad << "\n";
-}
+Diccionario::iterator& Diccionario::iterator::operator++(){
+  int ant, post;
 
-//TODO: ¿Es más eficiente usando la pila o no hace falta?
-void Diccionario::iterator::ConstruyeCadena(){
-  ArbolGeneral<info>::iter_preorden p;
-  stack<char> st;
+  ant = it.getlevel();
 
-  for(p = it; p != 0; p = datos.padre(p))
-    st.push(p->c);
+  // Avanza hasta la siguiente palabra válida
+  while(it != 0 && !(*it).final)
+    ++it;
 
-  cad.clear();
-  while(!st.empty()){
-    cad.push_back(st.top());
-    st.pop();
-  }
-}
+  post = it.getlevel();
 
-iterator& Diccionario::iterator::operator++(){
-  while(it != 0 && !(it->final))
-    it++;
 
-  if(it->final)
-    it.ConstruyeCadena();
+  // Actualiza la cadena (C++11)
+  if(post >= ant)
+    cad.pop_back();
   else
-    it.cad = "";
+    for(int i = 0; i < post-ant; i++)
+      cad.pop_back();
+
+  cad.push_back((*it).c);
 
   return *this;
 }
 
 bool Diccionario::iterator::operator==(const iterator &i){
-  return i.it == it;
+  return it == i.it;
 }
 
 bool Diccionario::iterator::operator!=(const iterator &i){
-  return i.it != it;
+  return it != i.it;
 }
 
-iterator Diccionario::begin(){
+Diccionario::iterator Diccionario::begin(){
   iterator beg;
   beg.it = datos.begin();
   if(beg != end())
-    beg++; //Avanza hasta la primera palabra válida
+    ++beg; //Avanza hasta la primera palabra válida
   return beg;
 }
 
-iterator Diccionario::end(){
+Diccionario::iterator Diccionario::end(){
   iterator end;
   end.it = datos.end();
   end.cad = "";
   return end;
+}
+
+ostream & operator<<(ostream & os, Diccionario & D){
+  for(Diccionario::iterator it = D.begin(); it != D.end(); ++it)
+    os << *it << "\n";
+  return os;
 }

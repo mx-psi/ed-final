@@ -3,7 +3,7 @@ INC = include
 OBJ = obj
 BIN = bin
 CXX = g++
-CPPFLAGS = -Wall -g -pedantic -I$(INC)
+CPPFLAGS = -I$(INC) -I$(SRC) -std=c++11 #-Wall -g -pedantic
 
 all:
 
@@ -13,8 +13,11 @@ documentacion:
 
 
 # ************ Compilación de módulos ************
-$(BIN)/%: $(SRC)/%.cpp
+
+$(BIN)/testdiccionario: $(SRC)/testdiccionario.cpp $(INC)/diccionario.h
 	$(CXX) $(CPPFLAGS) -o $@ $^
+
+$(INC)/diccionario.h: $(SRC)/diccionario.cpp $(INC)/ArbolGeneral.h $(SRC)/ArbolGeneral.cpp
 
 $(OBJ)/%.o: $(SRC)/%.cpp $(INC)/%.h
 	$(CXX) $(CPPFLAGS) -c $< -o $@

@@ -21,6 +21,7 @@ int main(int argc, char * argv[]){
   cout << "Leido el diccionario..." << endl;
   cout << D;
 
+  /*
   int longitud;
 
   cout << "Dime la longitud de las palabras que quieres ver";
@@ -30,6 +31,7 @@ int main(int argc, char * argv[]){
   cout << "Palabras de Longitud " << longitud << endl;
   for (unsigned int i=0;i<v.size();i++)
     cout << v[i] << endl;
+  */
 
  string p;
  cout << "Dime una palabra: ";
