@@ -270,14 +270,18 @@ int ArbolGeneral<T>::const_iter_preorden::getlevel()const{
 
 template <class T>
 ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preorden::operator ++(){
-  if (it->izqda != 0)
+  if (it->izqda != 0){
     it = it->izqda;
+    level++;
+  }
   else if (it->drcha != 0)
     it = it->drcha;
 
   else {
-    while (it->padre != 0 && it->drcha(it->padre) == 0)
+    while (it->padre != 0 && it->drcha(it->padre) == 0){
       it = it->padre;
+      level--;
+    }
     if (it->padre == 0)
       it = 0;
     else
