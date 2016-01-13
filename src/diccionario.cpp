@@ -11,15 +11,37 @@ int Diccionario::size() const{
 }
 
 /* TODO:
-vector<string> Diccionario::PalabrasLongitud(int longitud){
-}
-
-istream & operator>>(istream & is, Diccionario & D){
-
+vector<string> Diccionario::PalabrasLongitud(int longitud) const{
 }
 */
 
-bool Diccionario::Esta(string palabra){
+void Diccionario::Insertar(string palabra){
+  Nodo n = datos.raiz(), ant;
+
+  for(string::iterator it = palabra.begin(); it != palabra.end(); ++it){
+    for(n = datos.hijomasizquierda(n); n != 0; ant = n, n = datos.hermanoderecha(n))
+      if(n->c == *it)
+        break;
+
+    if(n == 0){
+      datos.insertar_hermanoderecha(ant,*it);
+      n = datos.hermanoderecha(ant);
+    }
+  }
+}
+
+istream & operator>>(istream & is, Diccionario & D){
+  string palabra;
+
+  while(is.good()){
+    getline(is, palabra);
+    D.Insertar(palabra);
+  }
+
+  return is;
+}
+
+bool Diccionario::Esta(string palabra) const{
   if(datos.raiz() == 0)
     return false;
 
@@ -27,7 +49,7 @@ bool Diccionario::Esta(string palabra){
   int pos = 0;
 
   // Avanza por el árbol hasta la última letra
-  while((pos < palabra.length() - 1) && n != 0){
+  while((pos < palabra.size() - 1) && n != 0){
     if(palabra[pos] == n->c){
       pos++;
       n = datos.hijomasizquierda(n);
@@ -52,29 +74,26 @@ ostream & operator<<(ostream & os, Diccionario & D){
     os << it->cad << "\n";
 }
 
-//TODO: ¿Es más eficiente usando la pila o no hace falta?
-void Diccionario::iterator::ConstruyeCadena(){
-  ArbolGeneral<info>::iter_preorden p;
-  stack<char> st;
-
-  for(p = it; p != 0; p = datos.padre(p))
-    st.push(p->c);
-
-  cad.clear();
-  while(!st.empty()){
-    cad.push_back(st.top());
-    st.pop();
-  }
-}
-
 iterator& Diccionario::iterator::operator++(){
+  int ant, post;
+
+  ant = it.getlevel();
+
+  // Avanza hasta la siguiente palabra válida
   while(it != 0 && !(it->final))
     it++;
 
-  if(it->final)
-    it.ConstruyeCadena();
+  post = it.getlevel();
+
+
+  // Actualiza la cadena (C++11)
+  if(post >= ant)
+    it.cad.pop_back();
   else
-    it.cad = "";
+    for(int i = 0; i < post-ant; i++)
+      it.cad.pop_back();
+
+  it.cad.push_back(it->c);
 
   return *this;
 }
