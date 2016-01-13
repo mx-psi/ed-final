@@ -37,6 +37,10 @@ class Diccionario{
     */
   ArbolGeneral<info> datos;
 public:
+  /**
+    * @brief Constructor por defecto
+    */
+  Diccionario():datos(info()){}
 
   /**
     * @brief Devuelve el número de palabras válidas del diccionario.
