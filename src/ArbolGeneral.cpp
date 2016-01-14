@@ -125,26 +125,31 @@ typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::raiz() const{
 
 template <class T>
 typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::hijomasizquierda(const typename ArbolGeneral<T>::Nodo n) const{
+  assert(n != 0);
   return n->izqda;
 }
 
 template <class T>
 typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::hermanoderecha(const typename ArbolGeneral<T>::Nodo n) const{
+  assert(n != 0);
   return n->drcha;
 }
 
 template <class T>
 typename ArbolGeneral<T>::Nodo ArbolGeneral<T>::padre(const typename ArbolGeneral<T>::Nodo n) const{
+  assert(n != 0);
   return n->padre;
 }
 
 template <class T>
 T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n){
+  assert(n != 0);
   return n->etiqueta;
 }
 
 template <class T>
 const T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n) const{
+  assert(n != 0);
   return n->etiqueta;
 }
 
@@ -179,7 +184,7 @@ template <class T>
 void ArbolGeneral<T>::insertar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
   rama.laraiz->drcha = n->drcha;
   rama.laraiz->padre = n->padre;
-  n->drcha           = rama.laraiz;
+  n->drcha = rama.laraiz;
   rama.laraiz = 0;
 }
 

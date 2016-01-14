@@ -15,27 +15,45 @@ void Diccionario::Insertar(string palabra){
   ArbolGeneral<info>::Nodo n = datos.raiz(), ant;
 
   for(unsigned i = 0; i < palabra.length(); ++i){
-    for(n = datos.hijomasizquierda(n); n != 0; ant = n, n = datos.hermanoderecha(n))
-      if(datos.etiqueta(n).c == palabra[i])
-        break;
+    ant = n;
+    n = datos.hijomasizquierda(n);
+
+    if(n == 0){
+      info c(palabra[i],i == palabra.length() -1);
+      ArbolGeneral<info> a(c);
+      datos.insertar_hijomasizquierda(ant,a);
+    }
+    else{
+    while(n != 0){
+      if(datos.etiqueta(n).c == palabra[i]){
+        if(i == palabra.length() -1){
+          datos.etiqueta(n).final = true;
+          break;
+        }
+        else
+          break;
+      }
+
+      ant = n;
+      n = datos.hermanoderecha(n);
+    }
 
     if(n == 0){
       info c(palabra[i],i == palabra.length() -1);
       ArbolGeneral<info> a(c);
       datos.insertar_hermanoderecha(ant,a);
       n = datos.hermanoderecha(ant);
+     }
     }
   }
 }
 
 istream & operator>>(istream & is, Diccionario & D){
   string palabra;
-
   while(is.good()){
     getline(is, palabra);
     D.Insertar(palabra);
   }
-
   return is;
 }
 
@@ -70,23 +88,21 @@ bool Diccionario::Esta(string palabra) const{
 Diccionario::iterator& Diccionario::iterator::operator++(){
   int ant, post;
 
-  ant = it.getlevel();
-
   // Avanza hasta la siguiente palabra válida
-  while(it != 0 && !(*it).final)
+  while(it != 0 && !(*it).final){
+    ant = it.getlevel();
     ++it;
+    post = it.getlevel();
 
-  post = it.getlevel();
-
-
-  // Actualiza la cadena (C++11)
-  if(post >= ant)
-    cad.pop_back();
-  else
-    for(int i = 0; i < post-ant; i++)
-      cad.pop_back();
-
-  cad.push_back((*it).c);
+    if(it != 0){
+      if(post >= ant)
+        cad.pop_back();
+      else
+        for(int i = 0; i < post-ant; i++)
+          cad.pop_back();
+      cad.push_back((*it).c);
+    }
+  }
 
   return *this;
 }
