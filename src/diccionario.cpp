@@ -22,32 +22,29 @@ void Diccionario::Insertar(string palabra){
       info c(palabra[i],i == palabra.length() -1);
       ArbolGeneral<info> a(c);
       datos.insertar_hijomasizquierda(ant,a);
-      n = ant;
+      n = datos.hijomasizquierda(ant);
     }
     else{
-    encontrado = false;
-    while(n != 0 && !encontrado){
-      if(datos.etiqueta(n).c == palabra[i]){
-        if(i == palabra.length() -1){
-          datos.etiqueta(n).final = true;
+      encontrado = false;
+      while(n != 0 && !encontrado){
+        if(datos.etiqueta(n).c == palabra[i]){
           encontrado = true;
+          if(i == palabra.length() -1)
+            datos.etiqueta(n).final = true;
         }
-        else
-          encontrado = true;
+
+        if(!encontrado){
+          ant = n;
+          n = datos.hermanoderecha(n);
+        }
       }
 
-    if(!encontrado){
-      ant = n;
-      n = datos.hermanoderecha(n);
+      if(n == 0){
+        info c(palabra[i],i == palabra.length() -1);
+        ArbolGeneral<info> a(c);
+        datos.insertar_hermanoderecha(ant,a);
+        n = datos.hermanoderecha(ant);
       }
-    }
-
-    if(n == 0){
-      info c(palabra[i],i == palabra.length() -1);
-      ArbolGeneral<info> a(c);
-      datos.insertar_hermanoderecha(ant,a);
-      n = datos.hermanoderecha(ant);
-     }
     }
   }
 }
@@ -90,23 +87,21 @@ bool Diccionario::Esta(string palabra) const{
 }
 
 Diccionario::iterator& Diccionario::iterator::operator++(){
-  int ant, post;
+  int ant, post = it.getlevel();
 
   // Avanza hasta la siguiente palabra válida
-  while(it != 0 && !(*it).final){
-    ant = it.getlevel();
+  do {
+    ant = post;
     ++it;
     post = it.getlevel();
 
     if(it != 0){
-      if(post >= ant)
+      for(int i = 0; i <= ant-post; i++)
         cad.pop_back();
-      else
-        for(int i = 0; i < post-ant; i++)
-          cad.pop_back();
+
       cad.push_back((*it).c);
     }
-  }
+  }while (it != 0 && !(*it).final);
 
   return *this;
 }

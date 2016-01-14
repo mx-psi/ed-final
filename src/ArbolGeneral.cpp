@@ -158,6 +158,7 @@ void ArbolGeneral<T>::podar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, Arb
 template <class T>
 void ArbolGeneral<T>::insertar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
   copiar(n->izqda,rama.laraiz);
+  n->izqda->padre = n;
   rama.clear();
   /*rama.laraiz->drcha = n->izqda->drcha;
   rama.laraiz->padre = n;
@@ -223,30 +224,27 @@ typename ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operat
     it = it->izqda;
     level++;
   }
-  else if (it->drcha != 0)
-    it = it->drcha;
-
   else {
-    while (it->padre != 0 && it->padre->drcha == 0){
+    while (it->padre != 0 && it->drcha == 0){
       it = it->padre;
       level--;
     }
     if (it->padre == 0)
       it = 0;
     else
-      it = it->padre->drcha;
+      it = it->drcha;
   }
   return *this;
 }
 
 template <class T>
 bool ArbolGeneral<T>::iter_preorden::operator==(const typename ArbolGeneral<T>::iter_preorden &i){
-  return raiz == i.raiz && it == i.it;
+  return (raiz == i.raiz || i.raiz == 0) && it == i.it;
 }
 
 template <class T>
 bool ArbolGeneral<T>::iter_preorden::operator!=(const typename ArbolGeneral<T>::iter_preorden &i){
-  return raiz != i.raiz || it != i.it;
+  return (raiz != i.raiz && i.raiz != 0) || it != i.it;
 }
 
 /* Iterador preorden constante */
