@@ -86,6 +86,11 @@ class ArbolGeneral{
         * es la raíz.
         */
        nodo *padre;
+
+       /**
+        * @brief Constructor por defecto
+        */
+       nodo():izqda(0), drcha(0), padre(0){}
     };
 
     /**

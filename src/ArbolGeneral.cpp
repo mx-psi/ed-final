@@ -1,14 +1,8 @@
 template <class T>
 void ArbolGeneral<T>::destruir(nodo * n){
   if(n != 0){
-    nodo *a_borrar = n->izqda, *sig;
-
-    while(a_borrar != 0){
-      sig = a_borrar->drcha;
-      destruir(a_borrar);
-      a_borrar = sig;
-    }
-
+    destruir(n->izqda);
+    destruir(n->drcha);
     delete n;
   }
 }
@@ -22,23 +16,13 @@ void ArbolGeneral<T>::copiar(nodo *& dest, nodo * orig){
   else{
     dest = new ArbolGeneral<T>::nodo;
     dest->etiqueta = orig->etiqueta;
-    nodo *dest_hijo = dest->izqda;
-    nodo *orig_hijo = orig->izqda;
-
-    do{
-      copiar(dest_hijo, orig_hijo);
-
-      if(dest_hijo != 0){
-        dest_hijo->padre = dest;
-        dest_hijo = dest_hijo->drcha;
-      }
-
-      if(orig_hijo != 0)
-        orig_hijo = orig_hijo->drcha;
-
-    } while(orig_hijo != 0);
+    copiar(dest->izqda, orig->izqda);
+    copiar(dest->drcha, orig->drcha);
+    if (dest->izqda != 0)
+      dest->izqda->padre = dest;
+    if (dest->drcha != 0)
+      dest->drcha->padre = dest;
   }
-
 }
 
 template <class T>
