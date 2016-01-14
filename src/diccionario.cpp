@@ -13,7 +13,7 @@ vector<string> Diccionario::PalabrasLongitud(int longitud) const{
 
 void Diccionario::Insertar(string palabra){
   ArbolGeneral<info>::Nodo n = datos.raiz(), ant;
-
+  bool encontrado = false;
   for(unsigned i = 0; i < palabra.length(); ++i){
     ant = n;
     n = datos.hijomasizquierda(n);
@@ -22,20 +22,24 @@ void Diccionario::Insertar(string palabra){
       info c(palabra[i],i == palabra.length() -1);
       ArbolGeneral<info> a(c);
       datos.insertar_hijomasizquierda(ant,a);
+      n = ant;
     }
     else{
-    while(n != 0){
+    encontrado = false;
+    while(n != 0 && !encontrado){
       if(datos.etiqueta(n).c == palabra[i]){
         if(i == palabra.length() -1){
           datos.etiqueta(n).final = true;
-          break;
+          encontrado = true;
         }
         else
-          break;
+          encontrado = true;
       }
 
+    if(!encontrado){
       ant = n;
       n = datos.hermanoderecha(n);
+      }
     }
 
     if(n == 0){

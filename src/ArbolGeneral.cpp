@@ -173,10 +173,13 @@ void ArbolGeneral<T>::podar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, Arb
 // ¿Debería hacerse copiando o así está bien?
 template <class T>
 void ArbolGeneral<T>::insertar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
-  rama.laraiz->drcha = n->izqda->drcha;
+  copiar(n->izqda,rama.laraiz);
+  rama.clear();
+  /*rama.laraiz->drcha = n->izqda->drcha;
   rama.laraiz->padre = n;
   n->izqda = rama.laraiz;
   rama.laraiz = 0;
+  */
 }
 
 // ¿Debería hacerse copiando o así está bien?
