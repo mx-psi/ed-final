@@ -3,7 +3,7 @@ INC = include
 OBJ = obj
 BIN = bin
 CXX = g++
-CPPFLAGS = -I$(INC) -I$(SRC) -std=c++11 -Wall -g -pedantic -O3
+CPPFLAGS = -I$(INC) -I$(SRC) -std=c++11 #-Wall -g -pedantic -O3
 
 all:
 

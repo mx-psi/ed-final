@@ -36,6 +36,16 @@ class Diccionario{
     * de forma ordenada.
     */
   ArbolGeneral<info> datos;
+
+  /**
+    * @brief Método auxiliar para PalabrasLongitud
+    * @param longitud: Longitud de las palabras
+    * @param n: Nodo desde el que se empiezan a buscar las palabras
+    * @param v: Vector donde se guardan las palabras
+    * @pre longitud es un entero positivo
+    * @see PalabrasLongitud
+    */
+  void PalabrasLong(int longitud, ArbolGeneral<info>::Nodo n, vector<string> &v) const;
 public:
   /**
     * @brief Constructor por defecto
@@ -54,7 +64,7 @@ public:
     * @pre longitud es un entero positivo
     * @return vector con las palabras de longitud `longitud`
     */
-  vector<string> PalabrasLongitud(int longitud);
+  vector<string> PalabrasLongitud(int longitud) const;
 
   /**
     * @brief Indica si una palabra está en el diccionario

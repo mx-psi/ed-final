@@ -1,3 +1,5 @@
+#include "../include/diccionario.h"
+
 int Diccionario::size() const{
   int n = 0;
   for(ArbolGeneral<info>::const_iter_preorden it = datos.begin(); it != datos.end(); ++it)
@@ -6,10 +8,29 @@ int Diccionario::size() const{
   return n;
 }
 
-/* TODO:
-vector<string> Diccionario::PalabrasLongitud(int longitud) const{
+void Diccionario::PalabrasLong(int longitud, ArbolGeneral<info>::Nodo n, vector<string> &v) const{
+ if(longitud == 1){
+   for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
+    if(datos.etiqueta(m).final){
+      string palabra;
+
+      for(ArbolGeneral<info>::Nodo k = m; datos.padre(k) != 0; k = datos.padre(k))
+        palabra = datos.etiqueta(k).c + palabra;
+
+      v.push_back(palabra);
+    }
+ }
+ else{
+   for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
+    PalabrasLong(longitud -1, m, v);
+ }
 }
-*/
+
+vector<string> Diccionario::PalabrasLongitud(int longitud) const{
+  vector<string> v;
+  PalabrasLong(longitud, datos.raiz(), v);
+  return v;
+}
 
 void Diccionario::Insertar(string palabra){
   ArbolGeneral<info>::Nodo n = datos.raiz(), ant;
