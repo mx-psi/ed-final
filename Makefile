@@ -5,7 +5,7 @@ BIN = bin
 CXX = g++
 CPPFLAGS = -I$(INC) -I$(SRC) -std=c++11 #-Wall -g -pedantic -O3
 
-all:
+all: $(BIN)/testdiccionario
 
 # ************ Generación de documentación ******************
 documentacion:
@@ -14,12 +14,10 @@ documentacion:
 
 # ************ Compilación de módulos ************
 
-$(BIN)/testdiccionario: $(SRC)/testdiccionario.cpp $(INC)/diccionario.h
+$(BIN)/%: $(OBJ)/%.o
 	$(CXX) $(CPPFLAGS) -o $@ $^
 
-$(INC)/diccionario.h: $(SRC)/diccionario.cpp $(INC)/ArbolGeneral.h $(SRC)/ArbolGeneral.cpp
-
-$(OBJ)/%.o: $(SRC)/%.cpp $(INC)/%.h
+$(OBJ)/%.o: $(SRC)/%.cpp
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 
