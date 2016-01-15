@@ -286,12 +286,12 @@ typename ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preo
 
 template <class T>
 bool ArbolGeneral<T>::const_iter_preorden::operator==(const typename ArbolGeneral<T>::const_iter_preorden &i){
-  return raiz == i.raiz && it == i.it;
+  return (raiz == i.raiz || i.raiz == 0) && it == i.it;
 }
 
 template <class T>
 bool ArbolGeneral<T>::const_iter_preorden::operator!=(const typename ArbolGeneral<T>::const_iter_preorden &i){
-  return raiz != i.raiz || it != i.it;
+  return (raiz != i.raiz && i.raiz != 0) || it != i.it;
 }
 
 /* Begin y end */

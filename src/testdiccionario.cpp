@@ -20,6 +20,7 @@ int main(int argc, char * argv[]){
   f >> D;
   cout << "Leido el diccionario..." << endl;
   cout << D;
+  cout << "Se han leido un total de " << D.size() << " palabras" << endl;
 
   /*
   int longitud;
@@ -36,9 +37,8 @@ int main(int argc, char * argv[]){
  string p;
  cout << "Dime una palabra: ";
  cin >> p;
- if (D.Esta(p)){
+ if (D.Esta(p))
     cout << "Sí esa palabra existe";
- }
  else
     cout << "Esa palabra no existe";
 
