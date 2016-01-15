@@ -154,20 +154,14 @@ void ArbolGeneral<T>::podar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, Arb
   n->drcha = n->drcha->drcha;
 }
 
-// ¿Debería hacerse copiando o así está bien?
 template <class T>
 void ArbolGeneral<T>::insertar_hijomasizquierda(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
-  copiar(n->izqda,rama.laraiz);
-  n->izqda->padre = n;
-  rama.clear();
-  /*rama.laraiz->drcha = n->izqda->drcha;
+  rama.laraiz->drcha = n->izqda;
   rama.laraiz->padre = n;
   n->izqda = rama.laraiz;
   rama.laraiz = 0;
-  */
 }
 
-// ¿Debería hacerse copiando o así está bien?
 template <class T>
 void ArbolGeneral<T>::insertar_hermanoderecha(typename ArbolGeneral<T>::Nodo n, ArbolGeneral<T>& rama){
   rama.laraiz->drcha = n->drcha;
@@ -201,7 +195,6 @@ template <class T>
 bool ArbolGeneral<T>::operator!=(const ArbolGeneral<T>& v) const{
   return !soniguales(laraiz, v.laraiz);
 }
-
 
 /* Iterador preorden no constante */
 
