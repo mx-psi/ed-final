@@ -124,7 +124,7 @@ public:
 
     /**
       * @brief Operador de acceso
-      * @return Palabra ala que apunta el iterador
+      * @return Palabra a la que apunta el iterador
       */
     inline string operator *(){return cad;}
 
