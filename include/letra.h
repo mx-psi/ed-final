@@ -1,14 +1,13 @@
 #ifndef __Letra_h__
 #define __Letra_h__
 
-#include <set>
 #include <vector>
 #include <string>
 #include <iostream>
 using namespace std;
 
 struct letra{
-  char l; ///<< Caracter de la letra
+  const char l; ///<< Caracter de la letra
   int n; ///<< Cantidad de veces que puede aparecer
   int puntos; ///<< Puntuación de la letra
 
@@ -32,11 +31,11 @@ struct letra{
 };
 
 class Conjunto_Letras{
-  set<letra> letras;
-public:
+  vector<letra> letras;
 
-  typedef set<letra>::iterator iterator;
-  typedef set<letra>::const_iterator const_iterator;
+public:
+  typedef vector<letra>::iterator iterator;
+  typedef vector<letra>::const_iterator const_iterator;
   /**
   * @brief Obtiene el iterador a una letra
   */

@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "diccionario.h"
+#include "diccionario.h" // letra.h
 
 int main(int argc, char * argv[]){
   if (argc != 4) {
@@ -32,11 +32,10 @@ int main(int argc, char * argv[]){
     (*cli).n = 0;
   
   for (Diccionario::iterator di = D.begin(); di != D.end(); ++di)
-    for (int k = 0; k < di.cad.length(); k++)
-      *(cl.Encuentra(di.cad[k])).n++;
-  }
+    for (unsigned int k = 0; k < (*di).length(); k++)
+      *(cl.Encuentra((*di)[k])).n++;
 
-  ofstrem fo(argv[3]);
+  ofstream fo(argv[3]);
   if (!fo) {
      cerr << "No se pudo imprimir el resultado" << endl;
      return 1;
