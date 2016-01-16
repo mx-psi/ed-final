@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "diccionario.h" // letra.h
+#include "diccionario.h"
 
 int main(int argc, char * argv[]){
   if (argc != 4) {
@@ -33,7 +33,9 @@ int main(int argc, char * argv[]){
   
   for (Diccionario::iterator di = D.begin(); di != D.end(); ++di)
     for (unsigned int k = 0; k < (*di).length(); k++)
-      *(cl.Encuentra((*di)[k])).n++;
+      (*cl.Encuentra((*di)[k])).n++;
+
+  // TODO: normalizar las frecuencias
 
   ofstream fo(argv[3]);
   if (!fo) {

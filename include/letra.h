@@ -36,6 +36,12 @@ class Conjunto_Letras{
 public:
   typedef vector<letra>::iterator iterator;
   typedef vector<letra>::const_iterator const_iterator;
+
+  const_iterator begin() const { return letras.begin(); }
+  const_iterator end() const { return letras.end(); }
+  iterator begin() { return letras.begin(); }
+  iterator end() { return letras.end(); }
+
   /**
   * @brief Obtiene el iterador a una letra
   */
@@ -54,7 +60,7 @@ public:
   /**
   * @brief Operador de escritura
   */
-  friend ostream & operator<<(ostream & is, Conjunto_Letras & C);
+  friend ostream & operator<<(ostream & os, const Conjunto_Letras & C);
 
   /**
   * @brief Añade una letra al conjunto
@@ -86,5 +92,7 @@ public:
   */
   bool Correcta(string palabra) const;
 };
+
+#include "letra.cpp"
 
 #endif
