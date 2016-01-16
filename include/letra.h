@@ -7,7 +7,7 @@
 using namespace std;
 
 struct letra{
-  const char l; ///<< Caracter de la letra
+  char l; ///<< Caracter de la letra
   int n; ///<< Cantidad de veces que puede aparecer
   int puntos; ///<< Puntuación de la letra
 
@@ -43,12 +43,12 @@ public:
   iterator end() { return letras.end(); }
 
   /**
-  * @brief Obtiene el iterador a una letra
+  * @brief Obtiene el iterador a una letra o donde debería insertarse
   */
   iterator Encuentra(char c);
 
   /**
-  * @brief Obtiene el iterador constante a una letra
+  * @brief Obtiene el iterador constante a una letra o donde debería insertarse
   */
   const_iterator Encuentra(char c) const;
 

@@ -32,8 +32,11 @@ int main(int argc, char * argv[]){
     (*cli).n = 0;
   
   for (Diccionario::iterator di = D.begin(); di != D.end(); ++di)
-    for (unsigned int k = 0; k < (*di).length(); k++)
-      (*cl.Encuentra((*di)[k])).n++;
+    for (unsigned int k = 0; k < (*di).length(); k++) {
+      cli = cl.Encuentra((*di)[k]);
+      if (cli != cl.end() && (*cli).n == (*di)[k]); // TODO: puede ir a end o hallar un caracter inexistente
+        (*cli).n++;
+    }
 
   // TODO: normalizar las frecuencias
 
@@ -42,9 +45,5 @@ int main(int argc, char * argv[]){
      cerr << "No se pudo imprimir el resultado" << endl;
      return 1;
   }
-  fo << "#Letra\tCantidad\tPuntos\n";
-
-  for (cli = cl.begin(); cli != cl.end(); ++cli)
-    cout << '\n' << (*cli).l << '\t' << (*cli).n << '\t' << (*cli).puntos;
-
+  fo << cl;
 }

@@ -1,17 +1,13 @@
 Conjunto_Letras::iterator Conjunto_Letras::Encuentra(char c) {
-  iterator pos = lower_bound(letras.begin(), letras.end(), letra(c, 0, 0));
-  if ((*pos).l != c)
-    return letras.end();
-
-  return pos;
+  return lower_bound(letras.begin(), letras.end(), letra(c, 0, 0));
 }
 
 Conjunto_Letras::const_iterator Conjunto_Letras::Encuentra(char c) const {
-  const_iterator pos = lower_bound(letras.begin(), letras.end(), letra(c, 0, 0));
-  if ((*pos).l != c)
-    return letras.end();
+  return lower_bound(letras.begin(), letras.end(), letra(c, 0, 0));
+}
 
-  return pos;
+void Conjunto_Letras::Add(char l, int n, int puntos) {
+  letras.insert(Encuentra(l), letra(l, n, puntos));
 }
 
 // TODO: ¿Debería borrarse previamente el contenido de C?
@@ -27,7 +23,7 @@ istream& operator>>(istream & is, Conjunto_Letras & C) {
     is.ignore();
     is >> p;
     is.ignore();
-    Conjunto_Letras.Add(letra(l, n, p));
+    C.Add(l, n, p);
   }
   return is;
 }
