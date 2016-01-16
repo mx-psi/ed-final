@@ -3,6 +3,7 @@
 
 #include <set>
 #include <vector>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -32,8 +33,10 @@ struct letra{
 
 class Conjunto_Letras{
   set<letra> letras;
-
 public:
+
+  typedef set<letra>::iterator iterator;
+  typedef set<letra>::const_iterator const_iterator;
   /**
   * @brief Obtiene el iterador a una letra
   */
@@ -58,6 +61,11 @@ public:
   * @brief Añade una letra al conjunto
   */
   void Add(char l, int n, int puntos);
+
+  /**
+  * @brief Obtiene la puntuación de una palabra
+  */
+  unsigned Puntuacion(string palabra) const;
 };
 
 class Bolsa_Letras{
@@ -73,6 +81,11 @@ public:
   * @brief Construye una bolsa de tamaño tam a partir de c
   */
   Bolsa_Letras(Conjunto_Letras &c, int tam);
+
+  /**
+  * @brief Indica si una palabra puede formarse con las letras de la bolsa
+  */
+  bool Correcta(string palabra) const;
 };
 
 #endif

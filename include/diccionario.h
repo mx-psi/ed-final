@@ -2,8 +2,7 @@
 #define __Diccionario_h__
 
 #include "ArbolGeneral.h"
-#include <vector>
-#include <string>
+#include "letra.h"
 using namespace std;
 
 /**
@@ -65,6 +64,15 @@ public:
     * @return vector con las palabras de longitud `longitud`
     */
   vector<string> PalabrasLongitud(int longitud) const;
+
+  /**
+    * @brief Obtiene las mejores soluciones
+    * @param bl: Letras que se pueden escoger
+    * @param modo: Modo de comparación
+    * @pre modo es un modo válido
+    * @return vector con las mejores soluciones
+    */
+  vector<string> MejoresSoluciones(const Bolsa_Letras &bl, string modo) const;
 
   /**
     * @brief Indica si una palabra está en el diccionario
