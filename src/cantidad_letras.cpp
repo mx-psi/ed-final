@@ -34,7 +34,7 @@ int main(int argc, char * argv[]){
   for (Diccionario::iterator di = D.begin(); di != D.end(); ++di)
     for (unsigned int k = 0; k < (*di).length(); k++) {
       cli = cl.Encuentra((*di)[k]);
-      if (cli != cl.end() && (*cli).l == (*di)[k]) // TODO: puede ir a end o hallar un caracter inexistente
+      if (cli != cl.end()) // TODO: puede ir a end
         (*cli).n++;
     }
 

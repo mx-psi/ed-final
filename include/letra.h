@@ -45,10 +45,20 @@ public:
   /**
   * @brief Obtiene el iterador a una letra o donde debería insertarse
   */
-  iterator Encuentra(char c);
+  inline iterator DondeIria(char c);
 
   /**
   * @brief Obtiene el iterador constante a una letra o donde debería insertarse
+  */
+  inline const_iterator DondeIria(char c) const;
+
+  /**
+  * @brief Obtiene el iterador a una letra o end() si no está
+  */
+  iterator Encuentra(char c);
+
+  /**
+  * @brief Obtiene el iterador constante a una letra o end() si no está
   */
   const_iterator Encuentra(char c) const;
 
