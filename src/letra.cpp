@@ -33,6 +33,7 @@ istream& operator>>(istream & is, Conjunto_Letras & C) {
   int n, p;
   while(is) {
     is.get(l);
+    l = tolower(l);
     is.ignore();
     is >> n;
     is.ignore();
@@ -46,7 +47,7 @@ istream& operator>>(istream & is, Conjunto_Letras & C) {
 ostream& operator<<(ostream & os, const Conjunto_Letras & C) {
   os << "#Letra Cantidad Puntos";
   for (Conjunto_Letras::const_iterator i = C.begin(); i != C.end(); ++i)
-    os << '\n' << (*i).l << '\t' << (*i).n << '\t' << (*i).puntos;
+    os << '\n' << (char) toupper((*i).l) << '\t' << (*i).n << '\t' << (*i).puntos;
 
   return os;
 }
