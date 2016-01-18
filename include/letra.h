@@ -69,6 +69,7 @@ public:
 
   /**
   * @brief Obtiene la puntuación de una palabra
+  * @pre La palabra es correcta
   */
   unsigned Puntuacion(string palabra) const;
 };
@@ -76,7 +77,13 @@ public:
 class Bolsa_Letras{
   vector<letra> letras;
 public:
+  typedef vector<letra>::iterator iterator;
+  typedef vector<letra>::const_iterator const_iterator;
 
+  const_iterator begin() const { return letras.begin(); }
+  const_iterator end() const { return letras.end(); }
+  iterator begin() { return letras.begin(); }
+  iterator end() { return letras.end(); }
   /**
   * @brief Constructor por defecto
   */

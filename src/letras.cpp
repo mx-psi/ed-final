@@ -39,7 +39,8 @@ int main(int argc, char * argv[]){
 
   Conjunto_Letras cl;
   fl >> cl;
-
+  char s_j;
+  
   do{
     Bolsa_Letras bl(cl,tam);
 
@@ -53,15 +54,13 @@ int main(int argc, char * argv[]){
 
     cout << s_usuario << "Puntuación: " << cl.Puntuacion(s_usuario) << endl;
 
-    cout << "Mis Soluciones son: "
-    vector<string> sols = D.MejoresPalabras(bl,modo);
+    cout << "Mis Soluciones son: ";
+    vector<string> sols = D.MejoresSoluciones(bl,modo);
 
     for (vector<string>::iterator it = sols.begin(); it != sols.end(); ++it)
       cout << *it << "Puntuación: " << cl.Puntuacion(*it) << endl;
 
     cout << "Mejor Solución:" << *sols.begin() << endl;
-
-    char s_j;
     cout << "¿Quieres seguir jugando [S/N]?";
     cin >> s_j;
   } while(s_j == 'S');
