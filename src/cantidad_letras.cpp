@@ -31,14 +31,19 @@ int main(int argc, char * argv[]){
   for (cli = cl.begin(); cli != cl.end(); ++cli)
     (*cli).n = 0;
   
+  int suma = 0;
+  
   for (Diccionario::iterator di = D.begin(); di != D.end(); ++di)
     for (unsigned int k = 0; k < (*di).length(); k++) {
       cli = cl.Encuentra((*di)[k]);
-      if (cli != cl.end() && (*cli).l == (*di)[k]) // TODO: puede ir a end o hallar un caracter inexistente
+      if (cli != cl.end()) {
         (*cli).n++;
+        suma++;
+      }
     }
 
-  // TODO: normalizar las frecuencias
+  for (cli = cl.begin(); cli != cl.end(); ++cli)
+    (*cli).n = ((*cli).n * 100 + (suma-1)) / suma; // Redondeará al alza
 
   ofstream fo(argv[3]);
   if (!fo) {
