@@ -51,3 +51,8 @@ ostream& operator<<(ostream & os, const Conjunto_Letras & C) {
 
   return os;
 }
+
+
+bool BolsaLetras::Esta(letra l) const {
+  return letras.Encuentra(l.c) != letras.end();
+}

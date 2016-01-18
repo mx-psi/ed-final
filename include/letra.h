@@ -86,7 +86,6 @@ public:
 class Bolsa_Letras{
   vector<letra> letras;
 public:
-
   /**
   * @brief Constructor por defecto
   */
@@ -96,6 +95,11 @@ public:
   * @brief Construye una bolsa de tamaño tam a partir de c
   */
   Bolsa_Letras(Conjunto_Letras &c, int tam);
+
+  /**
+  * @brief Indica si una letra está en la bolsa
+  */
+  bool Esta(letra l) const;
 
   /**
   * @brief Indica si una palabra puede formarse con las letras de la bolsa
