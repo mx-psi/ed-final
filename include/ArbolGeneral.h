@@ -10,7 +10,7 @@ using namespace std;
 
    \b Definición:
    Una instancia \e a del tipo de dato abstracto ArbolGeneral sobre un dominio
-   \e Tbase se puede construir como
+   \e Tbase se puede construir como:
 
    - Un objeto vacío (árbol vacío) si no contiene ningún elemento.
    Lo denotamos {}.
@@ -49,7 +49,7 @@ class ArbolGeneral{
 
   private:
     /**
-      *@brief nodo
+      * @brief nodo
       *
       * En cada  estructura \e nodo se almacena una etiqueta del árbol, que se
       * implementa como un conjunto de nodos enlazados según la relación
@@ -57,7 +57,7 @@ class ArbolGeneral{
       */
     struct nodo {
       /**
-        *@brief Elemento almacenado
+        * @brief Elemento almacenado
         *
         * En este campo se almacena la etiqueta que corresponde a este nodo.
         */
@@ -94,7 +94,7 @@ class ArbolGeneral{
     };
 
     /**
-      * @brief Puntero a la raíz.
+      * @brief Puntero a la raíz
       *
       * Este miembro es un puntero al primer nodo, que corresponde a la raíz
       * del árbol. Vale 0 sin el árbol es vacío.
@@ -122,16 +122,15 @@ class ArbolGeneral{
 
     /**
       * @brief Cuenta el número de nodos
-      * @param n Nodo del que cuelga el subárbol de nodos a contabilizar.
+      * @param n Nodo del que cuelga el subárbol de nodos a contabilizar
       *
-      * Cuenta cuántos nodos cuelgan de \e n, incluido éste.
+      * Cuenta cuántos nodos cuelgan de \e n, incluido este.
       */
     int contar(const nodo * n) const;
 
     /**
       * @brief Comprueba igualdad de dos subárboles
-      * @param n1 Primer subárbol a comparar
-      * @param n2 Segundo subárbol a comparar
+      * @param n1,n2 Subárboles a comparar
       *
       * Comprueba si son iguales los subárboles que cuelgan de \e n1 y \e n2.
       * Para ello deberán tener los mismos nodos en las mismas posiciones y
@@ -175,7 +174,7 @@ class ArbolGeneral{
       * referirse a cada uno de ellos) y además un valor destacado
       * \e nulo (0), que indica que no se refiere a ninguno de ellos.
       *
-      * Una variable \e n de este tipo se declara
+      * Una variable \e n de este tipo se declara:
       *
       * <tt>ArbolGeneral::Nodo n;</tt>
       *
@@ -229,7 +228,7 @@ class ArbolGeneral{
     /**
       * @brief Operador de asignación
       * @param v ArbolGeneral a copiar
-      * @return Referencia al árbol receptor.
+      * @return Referencia al árbol receptor
       *
       * Asigna el valor del árbol duplicando el contenido de \e v en el árbol
       * receptor.
@@ -251,14 +250,14 @@ class ArbolGeneral{
       * @brief Raíz del árbol
       * @return Nodo raíz del árbol receptor
       *
-      * Devuelve el nodo raíz, que es 0 (nulo) si el árbol está vacío.
+      * Devuelve el nodo raíz, que es 0 (nulo) si el árbol está vacío
       * La operación se realiza en tiempo O(1).
       */
     Nodo raiz() const;
 
     /**
       * @brief Hijo más a la izquierda
-      * @param n Nodo del que se quiere obtener el hijo más a la izquierda.
+      * @param n Nodo del que se quiere obtener el hijo más a la izquierda
       * @pre \e n no es nulo
       * @return Nodo hijo más a la izquierda
       *
@@ -270,7 +269,7 @@ class ArbolGeneral{
 
     /**
       * @brief Hermano derecha
-      * @param n Nodo del que se quiere obtener el hermano a la derecha.
+      * @param n Nodo del que se quiere obtener el hermano a la derecha
       * @pre \e n no es nulo
       * @return Nodo hermano a la derecha
       *
@@ -282,7 +281,7 @@ class ArbolGeneral{
 
     /**
       * @brief Nodo padre
-      * @param n Nodo del que se quiere obtener el padre.
+      * @param n Nodo del que se quiere obtener el padre
       * @pre \e n no es nulo
       * @return Nodo padre
       *
@@ -293,7 +292,7 @@ class ArbolGeneral{
 
     /**
       * @brief Etiqueta de un nodo
-      * @param n Nodo en el que se encuentra el elemento.
+      * @param n Nodo en el que se encuentra el elemento
       * @pre \e n no es nulo
       * @return Referencia al elemento del nodo \e n
       *
@@ -305,9 +304,9 @@ class ArbolGeneral{
 
     /**
       * @brief Etiqueta de un nodo
-      * @param n Nodo en el que se encuentra el elemento.
+      * @param n Nodo en el que se encuentra el elemento
       * @pre \e n no es nulo
-      * @return Referencia constante al elemento del nodo \e n.
+      * @return Referencia constante al elemento del nodo \e n
       *
       * Devuelve una referencia al elemento del nodo \e n. Es constante y por
       * tanto no se puede modificiar el valor.
@@ -318,8 +317,8 @@ class ArbolGeneral{
     /**
       * @brief Copia subárbol
       * @param orig Árbol desde el que se va a copiar una rama
-      * @param nod Nodo raíz del subárbol que se copia.
-      * @pre \e nod es un nodo del árbol \e orig y no es nulo
+      * @param nod Nodo raíz del subárbol que se copia
+      * @pre \e nod es un nodo no nulo del árbol \e orig
       *
       * El árbol receptor acaba con un valor copia del subárbol que cuelga del
       * nodo \e nod en el árbol \e orig. La operación se realiza en tiempo
@@ -329,25 +328,25 @@ class ArbolGeneral{
 
     /**
       * @brief Podar subárbol hijo más a la izquierda
-      * @param n Nodo al que se le podará la rama hijo más a la izquierda.
+      * @param n Nodo al que se le podará la rama hijo más a la izquierda
       * @param dest Árbol que recibe la rama cortada
-      * @pre \e n no es nulo y es un nodo válido del árbol receptor.
+      * @pre \e n es un nodo válido no nulo del árbol receptor
       *
       * Asigna un nuevo valor al árbol \e dest, con todos los elementos del
-      * subárbol izquierdo del nodo \e n en el árbol receptor. Éste se queda
+      * subárbol izquierdo del nodo \e n en el árbol receptor. Este se queda
       * sin dichos nodos.
-      *  La operación se realiza en tiempo O(1).
+      * La operación se realiza en tiempo O(1).
       */
     void podar_hijomasizquierda(Nodo n, ArbolGeneral<Tbase>& dest);
 
     /**
       * @brief Podar subárbol hermano derecha
-      * @param n Nodo al que se le podará la rama hermano derecha.
+      * @param n Nodo al que se le podará la rama hermano derecha
       * @param dest Árbol que recibe la rama cortada
-      * @pre \e n no es nulo y es un nodo válido del árbol receptor.
+      * @pre \e n es un nodo válido no nulo del árbol receptor
       *
       * Asigna un nuevo valor al árbol \e dest, con todos los elementos del
-      * subárbol hermano derecho del nodo \e n en el árbol receptor. Éste se
+      * subárbol hermano derecho del nodo \e n en el árbol receptor. Este se
       * queda sin dichos nodos.
       * La operación se realiza en tiempo O(1).
       */
@@ -356,9 +355,9 @@ class ArbolGeneral{
     /**
       * @brief Insertar subárbol hijo más a la izquierda
       * @param n: Nodo al que se insertará el árbol \e rama como hijo más a la
-      * izquierda.
-      * @param rama Árbol que se insertará como hijo más a la izquierda.
-      * @pre \e n no es nulo y es un nodo válido del árbol receptor
+      * izquierda
+      * @param rama Árbol que se insertará como hijo más a la izquierda
+      * @pre \e n es un nodo válido no nulo del árbol receptor
       *
       * El árbol \e rama se inserta como hijo más a la izquierda del nodo \e n
       * del árbol receptor. El árbol \e rama queda vacío y los nodos que
@@ -371,9 +370,9 @@ class ArbolGeneral{
     /**
       * @brief Insertar subárbol hermano derecha
       * @param n Nodo al que se insertará el árbol \e rama como hermano a la
-      * derecha.
-      * @param rama Árbol que se insertará como hermano derecho.
-      * @pre \e n no es nulo y es un nodo válido del árbol receptor
+      * derecha
+      * @param rama Árbol que se insertará como hermano derecho
+      * @pre \e n es un nodo válido no nulo del árbol receptor
       *
       * El árbol \e rama se inserta como hermano derecho del nodo \e n del
       * árbol receptor. El árbol \e rama queda vacío y los nodos que estaban a
@@ -385,14 +384,14 @@ class ArbolGeneral{
       * @brief Borra todos los elementos
       *
       * Borra todos los elementos del árbol receptor. Cuando termina, el árbol
-      * está vacía. La operación se realiza en tiempo O(n), donde \e n es el
+      * queda vacío. La operación se realiza en tiempo O(n), donde \e n es el
       * número de elementos del árbol receptor.
       */
     void clear();
 
     /**
       * @brief Número de elementos
-      * @return El número de elementos del árbol receptor.
+      * @return El número de elementos del árbol receptor
       *
       * La operación se realiza en tiempo O(n).
       * @see contar
@@ -401,8 +400,8 @@ class ArbolGeneral{
 
     /**
       * @brief Vacío
-      * @return Devuelve \e true si el número de elementos del árbol receptor
-      * es cero, \e false en caso contrario.
+      * @retval true si el número de elementos del árbol receptor es 0
+      * @retval false en caso contrario
       *
       * La operación se realiza en tiempo O(1).
       */
@@ -411,8 +410,8 @@ class ArbolGeneral{
     /**
       * @brief Operador de comparación (igualdad)
       * @param v ArbolGeneral con el que se desea comparar.
-      * @return Devuelve \e true si el árbol receptor tiene los mismos
-      * elementos y en el mismo orden, \e false en caso contrario.
+      * @retval true si el árbol receptor tiene los mismos elementos y en el mismo orden
+      * @retval false en caso contrario
       *
       * La operación se realiza en tiempo O(n).
       * @see soniguales
@@ -420,10 +419,10 @@ class ArbolGeneral{
     bool operator == (const ArbolGeneral<Tbase>& v) const;
 
     /**
-      * @brief Operador de comparación (diferencia)
+      * @brief Operador de comparación (desigualdad)
       * @param v ArbolGeneral con el que se desea comparar.
-      * @return Devuelve \e true si el árbol receptor no tiene los mismos
-      * elementos y en el mismo orden, \e false en caso contrario.
+      * @retval true si el árbol receptor no tiene los mismos elementos en el mismo orden
+      * @retval false en caso contrario
       *
       * La operación se realiza en tiempo O(n).
       */
@@ -462,132 +461,138 @@ class ArbolGeneral{
 
 
     /**
-     * @brief TDA. Iterador del ArbolGeneral  en preorden
-     * */
+      * @brief TDA. Iterador del ArbolGeneral en preorden
+      */
     class iter_preorden{
-       private:
-	 Nodo it; ///<Puntero al nodo
-	 Nodo raiz; ///<Puntero a la raiz del arbol donde esta it
-	 int level; ///< altura del nodo
-       public:
+    private:
+      Nodo it;   ///<Puntero al nodo
+      Nodo raiz; ///<Puntero a la raíz del árbol donde está it
+      int level; ///<Altura del nodo
 
-	 /**
-	  * @brief Constructor por defecto
-	  *
-	  * */
-	 iter_preorden();
+    public:
 
-   iter_preorden(Nodo n):it(n),raiz(0),level(-1){}
+      /**
+        * @brief Constructor por defecto
+        *
+        */
+      iter_preorden();
 
-	 /**
-	  * @brief Obtiene la etiqueta del nodo
-	  *
-	  * */
+      /**
+        * @brief Constructor a partir de nodo
+        *
+        */
+      iter_preorden(Nodo n):it(n),raiz(0),level(-1){}
 
-	 Tbase & operator*();
+      /**
+        * @brief Obtiene la etiqueta del nodo
+        *
+        */
+      Tbase & operator*();
 
+      /**
+        * @brief Obtiene el nivel del nodo
+        *
+        */
+      int getlevel()const;
 
-	 /**
-	  * @brief Obtiene el nivel del nodo
-	  *
-	  * */
+      /**
+        * @brief Obtiene un iterador al siguiente nodo según el recorrido en preorden
+        *
+        */
+      iter_preorden & operator ++();
 
+      /**
+        * @brief Compara dos iteradores
+        * @param i iterador con el que se compara
+        * @retval true si los dos iteradores son iguales (la raíz y el nodo son iguales)
+        * @retval false en caso contrario
+        */
+      bool operator == (const iter_preorden &i);
 
-	 int getlevel()const;
+	   /**
+        * @brief Compara dos iteradores
+	     * @param i iterador con el que se compara
+	     * @retval true si los iteradores son diferentes (las raíces o los nodos son diferentes)
+        * @retval false en caso contrario
+	     */
+      bool operator != (const iter_preorden &i);
 
-	 /**
-	  * @brief Obtiene un iterador al siguiente nodo segun el recorrido en preorden
-	  *
-	  * */
-	 iter_preorden & operator ++();
-
-	 /**
-	  * @brief Compara dos iteradores
-	  * @param i: iterador con el  que se compara
-	  * @return true si los dos iteradores son iguales (la raiz y el nodo son iguales). False en caso contrario
-	  * */
-	 bool operator == (const iter_preorden &i);
-
-	 /**
-	  * @brief Compara dos iteradores
-	  * @param i: iterador con el  que se compara
-	  * @return true si los dos iteradores son diferentes (la raiz o  el nodo son diferentes). False en caso contrario
-	  * */
-
-
-	 bool operator != (const iter_preorden &i);
-
-
-	 friend class ArbolGeneral;
+      friend class ArbolGeneral;
     };
+
+
+    /**
+      * @brief TDA. Iterador const del ArbolGeneral en preorden
+      */
     class const_iter_preorden{
-       private:
-	  const nodo * it;
-	  const nodo * raiz;
-	 int level;
-       public:
-	 /**
-	  * @brief Constructor por defecto
-	  *
-	  * */
-	 const_iter_preorden();
+    private:
+      const nodo * it;   ///<Puntero al nodo
+      const nodo * raiz; ///<Puntero a la raíz del árbol donde esta it
+      int level;         ///<Altura del nodo
 
-	 /**
-	  * @brief Obtiene la etiqueta del nodo
-	  *
-	  * */
+    public:
+      /**
+        * @brief Constructor por defecto
+        *
+        */
+      const_iter_preorden();
 
-	 const Tbase & operator*();
+      /**
+        * @brief Obtiene la etiqueta del nodo
+        *
+        */
+      const Tbase & operator*();
 
+      /**
+        * @brief Obtiene el nivel del nodo
+        *
+        */
+      int getlevel() const;
 
-	 /**
-	  * @brief Obtiene el nivel del nodo
-	  *
-	  * */
+      /**
+        * @brief Obtiene un iterador const al siguiente nodo según el recorrido en preorden
+        *
+        */
+      const_iter_preorden & operator ++();
 
+      /**
+        * @brief Compara dos iteradores
+        * @param i iterador con el con que se compara
+        * @retval true si los dos iteradores son iguales (la raíz y el nodo son iguales)
+        * @retval false en caso contrario
+        */
+      bool operator == (const const_iter_preorden &i);
 
-	 int getlevel()const;
+      /**
+        * @brief Compara dos iteradores
+        * @param i iterador con el con que se compara
+        * @retval true si los iteradores son diferentes (las raíces o los nodos son diferentes)
+        * @retval false en caso contrario
+        */
+      bool operator != (const const_iter_preorden &i);
 
-	 /**
-	  * @brief Obtiene un iterador al siguiente nodo segun el recorrido en preorden
-	  *
-	  * */
-	 const_iter_preorden & operator ++();
-
-	 /**
-	  * @brief Compara dos iteradores
-	  * @param i: iterador con el con que se comparación
-	  * @return true si los dos iteradores son iguales (la raiz y el nodo son iguales). False en caso contrario
-	  * */
-	 bool operator == (const const_iter_preorden &i);
-
-	 /**
-	  * @brief Compara dos iteradores
-	  * @param i: iterador con el con que se comparación
-	  * @return true si los dos iteradores son diferentes (la raiz o  el nodo son diferentes). False en caso contrario
-	  * */
-
-
-	 bool operator != (const const_iter_preorden &i);
-
-
-	 friend class ArbolGeneral;
+      friend class ArbolGeneral;
     };
 
     /**
-     * @brief Inicializa un iterador a la raiz del arbol. Nivel -1
-     */
-
-     iter_preorden begin();
-     const_iter_preorden begin()const;
-
+      * @brief Iterador a la raíz del arbol. Nivel -1
+      */
+    iter_preorden begin();
 
     /**
-     * @brief Inicializa un iterador al nodo nulo con la raiz del arbol. Nivel -1
-     */
-     iter_preorden end();
-     const_iter_preorden end()const;
+      * @brief Iterador const a la raíz del arbol. Nivel -1
+      */
+    const_iter_preorden begin() const;
 
+    /**
+      * @brief Iterador al nodo nulo con la raíz del árbol. Nivel -1
+      */
+    iter_preorden end();
+
+    /**
+      * @brief Iterador const al nodo nulo con la raíz del árbol. Nivel -1
+      */
+    const_iter_preorden end() const;
 };
 
 #include "ArbolGeneral.cpp"
