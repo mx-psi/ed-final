@@ -507,7 +507,7 @@ class ArbolGeneral{
         * @retval true si los dos iteradores son iguales (la raíz y el nodo son iguales)
         * @retval false en caso contrario
         */
-      bool operator == (const iter_preorden &i);
+      bool operator == (const iter_preorden &i) const;
 
 	   /**
         * @brief Compara dos iteradores
@@ -515,7 +515,7 @@ class ArbolGeneral{
 	     * @retval true si los iteradores son diferentes (las raíces o los nodos son diferentes)
         * @retval false en caso contrario
 	     */
-      bool operator != (const iter_preorden &i);
+      bool operator != (const iter_preorden &i) const;
 
       friend class ArbolGeneral;
     };
@@ -561,7 +561,7 @@ class ArbolGeneral{
         * @retval true si los dos iteradores son iguales (la raíz y el nodo son iguales)
         * @retval false en caso contrario
         */
-      bool operator == (const const_iter_preorden &i);
+      bool operator == (const const_iter_preorden &i) const;
 
       /**
         * @brief Compara dos iteradores
@@ -569,7 +569,7 @@ class ArbolGeneral{
         * @retval true si los iteradores son diferentes (las raíces o los nodos son diferentes)
         * @retval false en caso contrario
         */
-      bool operator != (const const_iter_preorden &i);
+      bool operator != (const const_iter_preorden &i) const;
 
       friend class ArbolGeneral;
     };

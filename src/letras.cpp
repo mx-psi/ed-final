@@ -85,7 +85,9 @@ int main(int argc, char * argv[]){
     for (vector<string>::iterator it = sols.begin(); it != sols.end(); ++it)
       cout << *it << " Puntuación: " << (modo == "P" ? cl.Puntuacion(*it) : (*it).length()) << endl;
 
-    cout << "Mejor Solución:" << *sols.begin() << endl;
+    if (sols.size() != 0)
+      cout << "Mejor Solución:" << *sols.begin() << endl;
+
     cout << "¿Quieres seguir jugando [S/N]? ";
     cin >> s_j;
   } while(s_j == 'S' || s_j == 's');

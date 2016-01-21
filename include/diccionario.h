@@ -29,19 +29,19 @@ struct info{
 */
 class Diccionario{
   /**
-    * @brief Arbol de datos
+    * @brief Árbol de datos
     *
-    * Éste árbol guarda las palabras del diccionario caracter a caracter
+    * Este árbol guarda las palabras del diccionario caracter a caracter
     * de forma ordenada.
     */
   ArbolGeneral<info> datos;
 
   /**
     * @brief Método auxiliar para PalabrasLongitud
-    * @param longitud: Longitud de las palabras
-    * @param n: Nodo desde el que se empiezan a buscar las palabras
-    * @param v: Vector donde se guardan las palabras
-    * @pre longitud es un entero positivo
+    * @param longitud Longitud de las palabras
+    * @param n Nodo desde el que se empiezan a buscar las palabras
+    * @param v Vector donde se guardan las palabras
+    * @pre longitud es mayor que cero
     * @see PalabrasLongitud
     */
   void PalabrasLong(int longitud, ArbolGeneral<info>::Nodo n, vector<string> &v) const;
@@ -59,86 +59,85 @@ public:
   Diccionario():datos(info()){}
 
   /**
-    * @brief Devuelve el número de palabras válidas del diccionario.
+    * @brief Devuelve el número de palabras válidas del diccionario
     * @return Número de palabras
     */
   int size() const;
 
   /**
     * @brief Obtiene las palabras de una cierta longitud
-    * @param longitud: Longitud de las palabras
-    * @pre longitud es un entero positivo
+    * @param longitud Longitud de las palabras
+    * @pre longitud es mayor que cero
     * @return vector con las palabras de longitud `longitud`
     */
   vector<string> PalabrasLongitud(int longitud) const;
 
   /**
     * @brief Obtiene las mejores soluciones
-    * @param bl: Letras que se pueden escoger
-    * @param cl: Puntero a conjunto de letras con puntuaciones (si se quiere longitud, puede omitirse)
+    * @param bl Letras que se pueden escoger
+    * @param cl Puntero a conjunto de letras con puntuaciones (si se quiere longitud, puede omitirse)
     * @pre disponibles está ordenado
-    * @return vector con las mejores soluciones
+    * @return Un vector con las mejores soluciones
     */
   vector<string> MejoresSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl=0) const;
   
   /**
     * @brief Obtiene la cadena de una palabra
-    * @param n: Nodo en el que termina la palabra
+    * @param n Nodo en el que termina la palabra
     */
   string Get(const ArbolGeneral<info>::Nodo& n) const;
   
   /**
     * @brief Obtiene la puntuación de una palabra
-    * @param n: Nodo en el que termina la palabra
-    * @param cl: Conjunto de letras con puntuaciones
+    * @param n Nodo en el que termina la palabra
+    * @param cl Conjunto de letras con puntuaciones
     */
   int GetPuntuacion(const ArbolGeneral<info>::Nodo& n, const Conjunto_Letras& cl) const;
 
   /**
     * @brief Indica si una palabra está en el diccionario
-    * @param palabra: La palabra a comprobar
+    * @param palabra La palabra a comprobar
     * @return Si la palabra está en el diccionario
     */
   bool Esta(string palabra) const;
 
   /**
     * @brief Inserta una palabra en el diccionario
-    * @param palabra: Palabra a insertar
+    * @param palabra Palabra a insertar
     */
   void Insertar(string palabra);
 
   /**
-    * @brief Lee a un flujo de entrada un diccionario
-    * @param is: flujo de entrada
-    * @param D: Diccionario
+    * @brief Lee desde flujo de entrada un diccionario
+    * @param is Flujo de entrada
+    * @param D Diccionario
     * @return Referencia al flujo
     */
   friend istream & operator>>(istream & is, Diccionario & D);
 
   /**
     * @brief Escribe un diccionario en un flujo de salida
-    * @param os: flujo de entrada
-    * @param D: Diccionario
+    * @param os Flujo de entrada
+    * @param D Diccionario
     * @return Referencia al flujo
     */
   friend ostream & operator<<(ostream & os, Diccionario & D);
 
   class iterator{
-
     /**
       * @brief Un iterador preorden sobre un caracter final
       */
     ArbolGeneral<info>::iter_preorden it;
 
     /**
-      * @brief Cadena formada por los caracteres del recorrido a la raiz
+      * @brief Cadena formada por los caracteres del recorrido a la raíz
       */
     string cad;
 
   public:
 
     /**
-      * @brief Constructor por defecto del iterador
+      * @brief Constructor por defecto
       */
     iterator(){}
 
@@ -159,17 +158,17 @@ public:
 
     /**
       * @brief Operador de comparación
-      * @param i: iterador a comparar
+      * @param i Iterador a comparar
       * @return Si son iguales
       */
-    bool operator==(const iterator &i);
+    bool operator==(const iterator &i) const;
 
     /**
       * @brief Operador de comparación
-      * @param i: iterador a comparar
+      * @param i iterador a comparar
       * @return Si son distintos
       */
-    bool operator!=(const iterator &i);
+    bool operator!=(const iterator &i) const;
 
     friend class Diccionario;
   };
@@ -177,13 +176,11 @@ public:
   /**
     * @brief Iterador a la primera palabra válida
     * @pre Existe al menos una palabra válida
-    * @return El iterador
     */
   iterator begin();
 
   /**
-    * @brief Iterador al siguiente del último
-    * @return El iterador
+    * @brief Iterador al siguiente de la última palabra
     */
   iterator end();
 };

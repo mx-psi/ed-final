@@ -1,29 +1,27 @@
-#include "../include/diccionario.h"
-
 int Diccionario::size() const{
   int n = 0;
   for(ArbolGeneral<info>::const_iter_preorden it = datos.begin(); it != datos.end(); ++it)
     if((*it).final)
       n++;
+
   return n;
 }
 
 void Diccionario::PalabrasLong(int longitud, ArbolGeneral<info>::Nodo n, vector<string> &v) const{
- if(longitud == 1){
-   for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
-    if(datos.etiqueta(m).final){
-      string palabra;
+  if(longitud == 1){
+    for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
+      if(datos.etiqueta(m).final){
+        string palabra;
 
-      for(ArbolGeneral<info>::Nodo k = m; datos.padre(k) != 0; k = datos.padre(k))
-        palabra = datos.etiqueta(k).c + palabra;
+        for(ArbolGeneral<info>::Nodo k = m; datos.padre(k) != 0; k = datos.padre(k))
+          palabra = datos.etiqueta(k).c + palabra;
 
-      v.push_back(palabra);
-    }
- }
- else{
-   for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
-    PalabrasLong(longitud -1, m, v);
- }
+        v.push_back(palabra);
+      }
+  }
+  else
+    for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
+      PalabrasLong(longitud-1, m, v);
 }
 
 vector<string> Diccionario::PalabrasLongitud(int longitud) const{
@@ -90,7 +88,7 @@ void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, const Conj
 
 vector<string> Diccionario::MejoresSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl) const {
   vector<string> salida;
-  ArbolGeneral<info>::Nodo prev = datos.raiz(), n;
+  ArbolGeneral<info>::Nodo prev = datos.raiz();
   int mejor = 0;
   RellenaSoluciones(disponibles, cl, datos.raiz(), salida, mejor);
   return salida;
@@ -143,6 +141,12 @@ istream & operator>>(istream & is, Diccionario & D){
   return is;
 }
 
+ostream & operator<<(ostream & os, Diccionario & D){
+  for(Diccionario::iterator it = D.begin(); it != D.end(); ++it)
+    os << *it << "\n";
+  return os;
+}
+
 bool Diccionario::Esta(string palabra) const{
   if(datos.raiz() == 0)
     return false;
@@ -191,11 +195,11 @@ Diccionario::iterator& Diccionario::iterator::operator++(){
   return *this;
 }
 
-bool Diccionario::iterator::operator==(const iterator &i){
+bool Diccionario::iterator::operator==(const iterator &i) const{
   return it == i.it;
 }
 
-bool Diccionario::iterator::operator!=(const iterator &i){
+bool Diccionario::iterator::operator!=(const iterator &i) const{
   return it != i.it;
 }
 
@@ -212,10 +216,4 @@ Diccionario::iterator Diccionario::end(){
   end.it = datos.end();
   end.cad = "";
   return end;
-}
-
-ostream & operator<<(ostream & os, Diccionario & D){
-  for(Diccionario::iterator it = D.begin(); it != D.end(); ++it)
-    os << *it << "\n";
-  return os;
 }

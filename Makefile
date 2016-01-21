@@ -5,7 +5,7 @@ BIN = bin
 CXX = g++
 CPPFLAGS = -I$(INC) -I$(SRC) -std=c++11 #-Wall -g -pedantic -O3
 
-all: $(BIN)/testdiccionario
+all: $(BIN)/testdiccionario $(BIN)/letras $(BIN)/cantidad_letras
 
 # ************ Generación de documentación ******************
 documentacion:
