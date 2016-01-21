@@ -73,7 +73,9 @@ int main(int argc, char * argv[]){
     cout << "Dime tu solución: ";
     do{
     cin >> s_usuario;
-    } while(!Correcta(disponibles, s_usuario)); // TODO: Poner un mensaje en caso de incorrecta
+    } while(s_usuario.length() > disponibles.size() || !Correcta(disponibles, s_usuario));
+    // TODO: Poner un mensaje en caso de incorrecta
+    // TODO: ¿Debería comprobar si la palabra está en el diccionario?
 
     cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
 

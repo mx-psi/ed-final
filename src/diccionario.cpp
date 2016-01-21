@@ -33,7 +33,7 @@ vector<string> Diccionario::PalabrasLongitud(int longitud) const{
 }
 
 string Diccionario::Get(const ArbolGeneral<info>::Nodo& n) const {
-  if (n == 0)
+  if (datos.etiqueta(n).c == '\0')
     return string();
 
   return Get(datos.padre(n)) + datos.etiqueta(n).c;
