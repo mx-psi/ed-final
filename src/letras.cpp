@@ -37,20 +37,19 @@ int main(int argc, char * argv[]){
     return 1;
   }
 
-  ifstream fd(dict);
+  ifstream fd(dict), fl(letras);
   if (!fd) {
     cerr << "No se pudo cargar el diccionario" << endl;
     return 1;
   }
 
-  Diccionario D;
-  fd >> D;
-
-  ifstream fl(letras);
   if (!fl) {
     cerr << "No se pudo cargar el fichero con las letras" << endl;
     return 1;
   }
+
+  Diccionario D;
+  fd >> D;
 
   Conjunto_Letras cl;
   fl >> cl;
@@ -79,16 +78,16 @@ int main(int argc, char * argv[]){
 
     cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
 
-    cout << "Mis Soluciones son: " << endl;
+    cout << "Mis soluciones son: " << endl;
     vector<string> sols = D.MejoresSoluciones(disponibles, (modo == "P" ? &cl : 0));
 
     for (vector<string>::iterator it = sols.begin(); it != sols.end(); ++it)
       cout << *it << " Puntuación: " << (modo == "P" ? cl.Puntuacion(*it) : (*it).length()) << endl;
 
     if (sols.size() != 0)
-      cout << "Mejor Solución:" << *sols.begin() << endl;
+      cout << "Mejor solución: " << *sols.begin() << endl;
 
-    cout << "¿Quieres seguir jugando [S/N]? ";
+    cout << "¿Quieres seguir jugando? [S/N]: ";
     cin >> s_j;
   } while(s_j == 'S' || s_j == 's');
 }

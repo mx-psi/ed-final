@@ -9,30 +9,29 @@ int main(int argc, char * argv[]){
 	 return 1;
   }
 
-  ifstream fd(argv[1]);
+  ifstream fd(argv[1]), fl(argv[2]);
   if (!fd) {
     cerr << "No se pudo cargar el diccionario" << endl;
     return 1;
   }
-  
-  Diccionario D;
-  fd >> D;
-  
-  ifstream fl(argv[2]);
+
   if (!fl) {
     cerr << "No se pudo cargar el fichero con las letras" << endl;
     return 1;
   }
-  
+
+  Diccionario D;
+  fd >> D;
+
   Conjunto_Letras cl;
   fl >> cl;
-  
+
   Conjunto_Letras::iterator cli;
   for (cli = cl.begin(); cli != cl.end(); ++cli)
     (*cli).n = 0;
-  
+
   int suma = 0;
-  
+
   for (Diccionario::iterator di = D.begin(); di != D.end(); ++di)
     for (unsigned int k = 0; k < (*di).length(); k++) {
       cli = cl.Encuentra((*di)[k]);
