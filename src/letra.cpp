@@ -30,6 +30,8 @@ unsigned Conjunto_Letras::Puntuacion(string palabra) const{
   unsigned puntuacion = 0;
   for (string::const_iterator it = palabra.begin(); it != palabra.end(); ++it)
     puntuacion += Encuentra(*it)->puntos;
+
+  return puntuacion;
 }
 
 
@@ -59,24 +61,21 @@ ostream& operator<<(ostream & os, const Conjunto_Letras & C) {
   return os;
 }
 
-bool Bolsa_Letras::Correcta(string palabra) const{
-  vector<letra> v = letras;
-  vector<letra>::iterator v_it;
+Bolsa_Letras::Bolsa_Letras(Conjunto_Letras &c) {
+  for (Conjunto_Letras::const_iterator it = c.begin(); it != c.end(); ++it)
+    letras.insert(letras.end(), (*it).n, *it);
+}
 
-  for(string::const_iterator s_it = palabra.begin(); s_it != palabra.end(); ++s_it){
-    for(v_it = v.begin(); v_it != v.end(); ++v_it)
-      if(v_it->l == *s_it){
-        if(v_it->n > 0)
-          v_it->n--;
-        else
-          return false;
-        break;
-      }
+int Bolsa_Letras::Cantidad() const {
+  return letras.size();
+}
 
-    if(v_it == v.end())
-      return false;
-  }
-  return true;
+vector<letra> Bolsa_Letras::MuestraAleatoria(int tam) const {
+  vector<letra> salida(tam);
+  for (int i = 0; i < tam; i++)
+    salida[i] = letras[rand()%Cantidad()];
+
+  return salida;
 }
 
 ostream& operator<<(ostream & os, const Bolsa_Letras & B) {
@@ -86,6 +85,10 @@ ostream& operator<<(ostream & os, const Bolsa_Letras & B) {
   return os;
 }
 
-bool BolsaLetras::Esta(letra l) const {
-  return letras.Encuentra(l.c) != letras.end();
+Bolsa_Letras::const_iterator Bolsa_Letras::Encuentra(char c) const {
+  Bolsa_Letras::const_iterator it = lower_bound(letras.begin(), letras.end(), letra(c, 0, 0));
+  if (it != end() && (*it).l != c)
+    return end();
+
+  return it;
 }

@@ -6,8 +6,8 @@
 using namespace std;
 
 /**
-  *@brief info
-  * En cada  estructura \e info se almacena una letra y si esta es final.
+  * @brief info
+  * En cada estructura \e info se almacena una letra y si esta es final.
   */
 struct info{
   char c; ///<< caracter almacenado
@@ -45,6 +45,13 @@ class Diccionario{
     * @see PalabrasLongitud
     */
   void PalabrasLong(int longitud, ArbolGeneral<info>::Nodo n, vector<string> &v) const;
+
+  /**
+    * @brief Método auxiliar para MejoresSoluciones
+    * @see MejoresSoluciones
+    */   
+  void RellenaSoluciones(const vector<letra> &disponibles, string modo, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const;
+
 public:
   /**
     * @brief Constructor por defecto
@@ -70,9 +77,16 @@ public:
     * @param bl: Letras que se pueden escoger
     * @param modo: Modo de comparación
     * @pre modo es un modo válido
+    * @pre disponibles está ordenado
     * @return vector con las mejores soluciones
     */
-  vector<string> MejoresSoluciones(const Bolsa_Letras &bl, string modo) const;
+  vector<string> MejoresSoluciones(const vector<letra> &disponibles, string modo) const;
+  
+  /**
+    * @brief Obtiene la cadena de una palabra
+    * @param n: Nodo en el que termina la palabra
+    */
+  string Get(const ArbolGeneral<info>::Nodo& n) const;
 
   /**
     * @brief Indica si una palabra está en el diccionario

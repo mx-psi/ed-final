@@ -43,10 +43,10 @@ int ArbolGeneral<T>::contar(const nodo * n) const{
 
 template <class T>
 bool ArbolGeneral<T>::soniguales(const nodo * n1, const nodo * n2) const{
-  if(n1 == 0 && n2 == 0) //Ambos nulos
+  if(n1 == 0 && n2 == 0) // Ambos nulos
     return true;
 
-  if(n1 == 0 || n2 == 0) //Uno nulo y el otro no
+  if(n1 == 0 || n2 == 0) // Uno nulo y el otro no
     return false;
 
   bool iguales  = n1->etiqueta == n2->etiqueta;
@@ -71,9 +71,6 @@ template <class T>
 ArbolGeneral<T>::ArbolGeneral(const T& e){
   laraiz = new nodo;
   laraiz->etiqueta = e;
-  laraiz->drcha = 0;
-  laraiz->izqda = 0;
-  laraiz->padre = 0;
 }
 
 template <class T>

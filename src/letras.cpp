@@ -1,7 +1,22 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <algorithm>     // std::sort
 #include "diccionario.h"
+
+bool Correcta(vector<letra> disponibles, string palabra) {
+  if (palabra.length() == 0)
+    return true;
+
+  for (vector<letra>::const_iterator v_it = disponibles.begin(); v_it != disponibles.end(); ++v_it)
+    if (palabra.back() == (*v_it).l) {
+      disponibles.erase(v_it);
+      palabra.pop_back();
+      return Correcta(disponibles, palabra);
+    }
+
+  return false;
+}
 
 int main(int argc, char * argv[]){
   if (argc != 5) {
@@ -40,25 +55,33 @@ int main(int argc, char * argv[]){
   Conjunto_Letras cl;
   fl >> cl;
   char s_j;
+  Bolsa_Letras bl(cl);
+  srand(time(0));
   
   do{
-    Bolsa_Letras bl(cl,tam);
+    vector<letra> disponibles = bl.MuestraAleatoria(tam);
 
     string s_usuario;
-    cout << "Las letras son: " << bl << endl;
+    cout << "Las letras son: ";
+    for (vector<letra>::const_iterator it = disponibles.begin(); it != disponibles.end(); ++it)
+      cout << (it != disponibles.begin()?'\t':' ') << (*it).l << " ";
+   
+    cout << "\n" << endl;
+    
+    sort(disponibles.begin(), disponibles.end());
 
     cout << "Dime tu solución: ";
     do{
     cin >> s_usuario;
-    } while(!bl.Correcta(s_usuario));
+    } while(!Correcta(disponibles, s_usuario)); // TODO: Poner un mensaje en caso de incorrecta
 
-    cout << s_usuario << "Puntuación: " << cl.Puntuacion(s_usuario) << endl;
+    cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
 
-    cout << "Mis Soluciones son: ";
-    vector<string> sols = D.MejoresSoluciones(bl,modo);
+    cout << "Mis Soluciones son: " << endl;
+    vector<string> sols = D.MejoresSoluciones(disponibles, modo);
 
     for (vector<string>::iterator it = sols.begin(); it != sols.end(); ++it)
-      cout << *it << "Puntuación: " << cl.Puntuacion(*it) << endl;
+      cout << *it << " Puntuación: " << (modo == "P" ? cl.Puntuacion(*it) : (*it).length()) << endl;
 
     cout << "Mejor Solución:" << *sols.begin() << endl;
     cout << "¿Quieres seguir jugando [S/N]?";

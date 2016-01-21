@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 struct letra{
@@ -101,19 +102,29 @@ public:
   Bolsa_Letras(){}
 
   /**
+  * @brief Construye una bolsa completa a partir de c
+  */
+  Bolsa_Letras(Conjunto_Letras &c);
+
+  /**
   * @brief Construye una bolsa de tamaño tam a partir de c
   */
   Bolsa_Letras(Conjunto_Letras &c, int tam);
 
   /**
-  * @brief Indica si una letra está en la bolsa
+  * @brief Devuelve el número de elementos
   */
-  bool Esta(letra l) const;
+  int Cantidad() const;
 
   /**
-  * @brief Indica si una palabra puede formarse con las letras de la bolsa
+  * @brief Obtiene un subconjunto al azar
   */
-  bool Correcta(string palabra) const;
+  vector<letra> MuestraAleatoria(int tam) const;
+
+  /**
+  * @brief Localiza la primera aparición de una letra por su caracter o devuelve end() si no está
+  */
+  const_iterator Encuentra(char c) const;
 };
 
 #include "letra.cpp"
