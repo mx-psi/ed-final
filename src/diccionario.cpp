@@ -39,7 +39,14 @@ string Diccionario::Get(const ArbolGeneral<info>::Nodo& n) const {
   return Get(datos.padre(n)) + datos.etiqueta(n).c;
 }
 
-void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, string modo, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const {
+int Diccionario::GetPuntuacion(const ArbolGeneral<info>::Nodo& n, const Conjunto_Letras& cl) const {
+  if (datos.etiqueta(n).c == '\0')
+    return 0;
+
+  return GetPuntuacion(datos.padre(n), cl) + (*cl.Encuentra(datos.etiqueta(n).c)).puntos;
+}
+
+void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const {
   ArbolGeneral<info>::Nodo n;
   vector<letra>::const_iterator i = disponibles.begin();
   while (i != disponibles.end()) {
@@ -52,16 +59,25 @@ void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, string mod
 
         if (datos.etiqueta(n).final) {
           string candidato = Get(n);
-          if (modo == "L" && candidato.length() >= mejor) {
+          if (!cl && candidato.length() >= mejor) {
             if (candidato.length() > mejor) {
               mejor = candidato.length();
               salida.clear();
             }
             salida.push_back(candidato);
           }
-          // TODO: modo puntuación
+          else if (cl) {
+            int puntuacion = GetPuntuacion(n, *cl);
+            if (puntuacion >= mejor) {
+              if (puntuacion > mejor) {
+                mejor = puntuacion;
+                salida.clear();
+              }
+              salida.push_back(candidato);
+            }
+          }
         }
-        RellenaSoluciones(subletras, modo, n, salida, mejor);
+        RellenaSoluciones(subletras, cl, n, salida, mejor);
       }
     }
   
@@ -69,37 +85,14 @@ void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, string mod
     do {
       ++i;
     } while (i != disponibles.end() && *i == last);
-  /*
-  for (n = datos.hijomasizquierda(prev); n != 0; n = datos.hermanoderecha(n)) {
-    vector<letra>::const_iterator i = disponibles.Encuentra(datos.etiqueta(n).c);
-    if (i != bl.end()) {
-      vector<letra> subletras;
-      for (Bolsa_Letras::const_iterator j = bl.begin(); j != bl.end(); ++j)
-        if (i != j)
-          subletras.push_back(*j);
-
-      if (datos.etiqueta(n).final) {
-        string candidato = Get(n);
-          if (modo == "L" && candidato.length() >= mejor) {
-            if (candidato.length() > mejor) {
-              mejor = candidato.length();
-              salida.clear();
-            }
-            salida.push_back(candidato);
-          }
-          // TODO: modo P. Requiere poder calcular la puntuación, para lo que habría que obtener
-          // un Conjunto_Letras o redefinir la puntuación en Bolsa_Letras
-      }
-      RellenaSoluciones(Bolsa_Letras(subletras), modo, n, salida, mejor);
-    }*/
   }
 }
 
-vector<string> Diccionario::MejoresSoluciones(const vector<letra> &disponibles, string modo) const {
+vector<string> Diccionario::MejoresSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl) const {
   vector<string> salida;
   ArbolGeneral<info>::Nodo prev = datos.raiz(), n;
   int mejor = 0;
-  RellenaSoluciones(disponibles, modo, datos.raiz(), salida, mejor);
+  RellenaSoluciones(disponibles, cl, datos.raiz(), salida, mejor);
   return salida;
 }
 

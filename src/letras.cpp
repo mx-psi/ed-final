@@ -80,13 +80,13 @@ int main(int argc, char * argv[]){
     cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
 
     cout << "Mis Soluciones son: " << endl;
-    vector<string> sols = D.MejoresSoluciones(disponibles, modo);
+    vector<string> sols = D.MejoresSoluciones(disponibles, (modo == "P" ? &cl : 0));
 
     for (vector<string>::iterator it = sols.begin(); it != sols.end(); ++it)
       cout << *it << " Puntuación: " << (modo == "P" ? cl.Puntuacion(*it) : (*it).length()) << endl;
 
     cout << "Mejor Solución:" << *sols.begin() << endl;
-    cout << "¿Quieres seguir jugando [S/N]?";
+    cout << "¿Quieres seguir jugando [S/N]? ";
     cin >> s_j;
-  } while(s_j == 'S');
+  } while(s_j == 'S' || s_j == 's');
 }

@@ -50,7 +50,7 @@ class Diccionario{
     * @brief Método auxiliar para MejoresSoluciones
     * @see MejoresSoluciones
     */   
-  void RellenaSoluciones(const vector<letra> &disponibles, string modo, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const;
+  void RellenaSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const;
 
 public:
   /**
@@ -75,18 +75,24 @@ public:
   /**
     * @brief Obtiene las mejores soluciones
     * @param bl: Letras que se pueden escoger
-    * @param modo: Modo de comparación
-    * @pre modo es un modo válido
+    * @param cl: Puntero a conjunto de letras con puntuaciones (si se quiere longitud, puede omitirse)
     * @pre disponibles está ordenado
     * @return vector con las mejores soluciones
     */
-  vector<string> MejoresSoluciones(const vector<letra> &disponibles, string modo) const;
+  vector<string> MejoresSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl=0) const;
   
   /**
     * @brief Obtiene la cadena de una palabra
     * @param n: Nodo en el que termina la palabra
     */
   string Get(const ArbolGeneral<info>::Nodo& n) const;
+  
+  /**
+    * @brief Obtiene la puntuación de una palabra
+    * @param n: Nodo en el que termina la palabra
+    * @param cl: Conjunto de letras con puntuaciones
+    */
+  int GetPuntuacion(const ArbolGeneral<info>::Nodo& n, const Conjunto_Letras& cl) const;
 
   /**
     * @brief Indica si una palabra está en el diccionario
