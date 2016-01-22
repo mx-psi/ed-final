@@ -18,6 +18,18 @@ bool Correcta(vector<letra> disponibles, string palabra) {
   return false;
 }
 
+bool Mal(const string& s, const vector<letra>& disponibles, const Diccionario& D) {
+  if (s.length() > disponibles.size() || !Correcta(disponibles, s)) {
+    cout << "Esa palabra no puede formarse con las letras disponibles.\n";
+    return true;
+  }
+  if (!D.Esta(s)) {
+    cout << "Esa palabra no está en el diccionario.\n";
+    return true;
+  }
+  return false;
+}
+
 int main(int argc, char * argv[]){
   if (argc != 5) {
 	 cerr << "Uso: " << argv[0] << " diccionario letras tamaño modo" << endl;
@@ -69,12 +81,10 @@ int main(int argc, char * argv[]){
     
     sort(disponibles.begin(), disponibles.end());
 
-    cout << "Dime tu solución: ";
-    do{
-    cin >> s_usuario;
-    } while(s_usuario.length() > disponibles.size() || !Correcta(disponibles, s_usuario));
-    // TODO: Poner un mensaje en caso de incorrecta
-    // TODO: ¿Debería comprobar si la palabra está en el diccionario?
+    do {
+      cout << "Dime tu solución: ";
+      cin >> s_usuario;
+    } while(Mal(s_usuario, disponibles, D));
 
     cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
 
