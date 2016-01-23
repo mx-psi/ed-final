@@ -70,26 +70,31 @@ int main(int argc, char * argv[]){
   srand(time(0));
   
   do{
-    vector<letra> disponibles = bl.MuestraAleatoria(tam);
+    vector<letra> disponibles, disponibles_ordenadas;
+    vector<string> sols;
+
+    while (sols.empty()) {
+      disponibles_ordenadas = disponibles = bl.MuestraAleatoria(tam);
+      sort(disponibles_ordenadas.begin(), disponibles_ordenadas.end());
+      sols = D.MejoresSoluciones(disponibles_ordenadas, (modo == "P" ? &cl : 0));
+    }
 
     string s_usuario;
     cout << "Las letras son: ";
     for (vector<letra>::const_iterator it = disponibles.begin(); it != disponibles.end(); ++it)
       cout << (it != disponibles.begin()?'\t':' ') << (*it).l << " ";
-   
+
     cout << "\n" << endl;
-    
-    sort(disponibles.begin(), disponibles.end());
 
     do {
-      cout << "Dime tu solución: ";
+      cout << "Dime tu solución (escribe un punto '.' para rendirte): ";
       cin >> s_usuario;
-    } while(Mal(s_usuario, disponibles, D));
+    } while(s_usuario != "." && Mal(s_usuario, disponibles_ordenadas, D));
 
-    cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
+    if (s_usuario != ".")
+      cout << s_usuario << " Puntuación: " << (modo == "P" ? cl.Puntuacion(s_usuario) : s_usuario.length()) << endl;
 
     cout << "Mis soluciones son: " << endl;
-    vector<string> sols = D.MejoresSoluciones(disponibles, (modo == "P" ? &cl : 0));
 
     for (vector<string>::iterator it = sols.begin(); it != sols.end(); ++it)
       cout << *it << " Puntuación: " << (modo == "P" ? cl.Puntuacion(*it) : (*it).length()) << endl;
