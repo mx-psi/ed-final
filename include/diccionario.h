@@ -93,6 +93,13 @@ public:
     * @param cl Conjunto de letras con puntuaciones
     */
   int GetPuntuacion(const ArbolGeneral<info>::Nodo& n, const Conjunto_Letras& cl) const;
+  
+  /**
+    * @brief Obtiene la longitud
+    * @param n Nodo en el que termina la palabra
+    * @return Número de caracteres de la palabra
+    */
+  int GetLongitud(const ArbolGeneral<info>::Nodo& n) const;
 
   /**
     * @brief Indica si una palabra está en el diccionario

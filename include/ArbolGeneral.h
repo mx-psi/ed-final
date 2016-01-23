@@ -315,6 +315,20 @@ class ArbolGeneral{
     const Tbase& etiqueta(const Nodo n) const;
 
     /**
+      * @brief Nivel de un nodo
+      * @param n Nodo cuyo nivel se quiere saber
+      * @return Distancia a la raíz, o -1 si el nodo es nulo
+      *
+      * Devuelve el número de pasos de hijo a padre
+      * que se requerirían para llegar a la raíz.
+      * La operación se realiza en tiempo O(n),
+      * siendo n el número de elementos del árbol,
+      * aunque en un árbol bien equilibrado el tiempo
+      * medio sería logarítmico.
+      */
+    int nivel(const Nodo n) const;
+
+    /**
       * @brief Copia subárbol
       * @param orig Árbol desde el que se va a copiar una rama
       * @param nod Nodo raíz del subárbol que se copia

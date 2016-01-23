@@ -135,6 +135,17 @@ const T& ArbolGeneral<T>::etiqueta(const typename ArbolGeneral<T>::Nodo n) const
 }
 
 template <class T>
+int ArbolGeneral<T>::nivel(const typename ArbolGeneral<T>::Nodo n) const{
+  typename ArbolGeneral<T>::Nodo r = n;
+  int s = -1;
+  while (r != 0) {
+    r = padre(r);
+    ++s;
+  }
+  return s;
+}
+
+template <class T>
 void ArbolGeneral<T>::asignar_subarbol(const ArbolGeneral<T>& orig, const typename ArbolGeneral<T>::Nodo nod){
  orig.copiar(laraiz,nod); // laraiz se destruye en copiar
 }

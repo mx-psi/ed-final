@@ -44,6 +44,10 @@ int Diccionario::GetPuntuacion(const ArbolGeneral<info>::Nodo& n, const Conjunto
   return GetPuntuacion(datos.padre(n), cl) + (*cl.Encuentra(datos.etiqueta(n).c)).puntos;
 }
 
+int Diccionario::GetLongitud(const ArbolGeneral<info>::Nodo& n) const {
+  return datos.nivel(n);
+}
+
 void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const {
   ArbolGeneral<info>::Nodo n;
   vector<letra>::const_iterator i = disponibles.begin();
@@ -56,23 +60,13 @@ void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, const Conj
             subletras.push_back(*j);
 
         if (datos.etiqueta(n).final) {
-          string candidato = Get(n);
-          if (!cl && candidato.length() >= mejor) {
-            if (candidato.length() > mejor) {
-              mejor = candidato.length();
+          int puntuacion = (cl ? GetPuntuacion(n, *cl) : GetLongitud(n));
+          if (puntuacion >= mejor) {
+            if (puntuacion > mejor) {
+              mejor = puntuacion;
               salida.clear();
             }
-            salida.push_back(candidato);
-          }
-          else if (cl) {
-            int puntuacion = GetPuntuacion(n, *cl);
-            if (puntuacion >= mejor) {
-              if (puntuacion > mejor) {
-                mejor = puntuacion;
-                salida.clear();
-              }
-              salida.push_back(candidato);
-            }
+            salida.push_back(Get(n));
           }
         }
         RellenaSoluciones(subletras, cl, n, salida, mejor);
