@@ -54,7 +54,7 @@ class Diccionario{
     * @param salida Referencia donde se guardan las soluciones
     * @param mejor Referencia a la mayor puntuación encontrada
     * @see MejoresSoluciones
-    */   
+    */
   void RellenaSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const;
 
 public:
@@ -85,20 +85,20 @@ public:
     * @return Un vector con las mejores soluciones
     */
   vector<string> MejoresSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl=0) const;
-  
+
   /**
     * @brief Obtiene la cadena de una palabra
     * @param n Nodo en el que termina la palabra
     */
   string Get(const ArbolGeneral<info>::Nodo& n) const;
-  
+
   /**
     * @brief Obtiene la puntuación de una palabra
     * @param n Nodo en el que termina la palabra
     * @param cl Conjunto de letras con puntuaciones
     */
   int GetPuntuacion(const ArbolGeneral<info>::Nodo& n, const Conjunto_Letras& cl) const;
-  
+
   /**
     * @brief Obtiene la longitud
     * @param n Nodo en el que termina la palabra

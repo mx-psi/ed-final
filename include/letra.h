@@ -7,6 +7,17 @@
 #include <ctime>
 using namespace std;
 
+/**
+   @brief T.D.A. Letra
+   \b Definición:
+   Una instancia \e a del tipo de dato abstracto Letra es una tripleta (l,n,p)
+   donde l es una letra, y n y p enteros positivos (cantidad y puntuación).
+   Para poder usar el tipo de dato Letra se debe incluir el fichero
+
+   <tt>\#include letra.h</tt>
+
+   El espacio requerido para el almacenamiento es O(1).
+*/
 struct letra{
   char l; ///<< Caracter de la letra
   int n; ///<< Cantidad de veces que puede aparecer
@@ -15,22 +26,40 @@ struct letra{
   letra():l('\0'),n(0),puntos(-1){}
   letra(char let, int cant, int p):l(let),n(cant),puntos(p){}
 
-  bool operator<(const letra& otra) const {
-    return l < otra.l;
-  }
+  /**
+  * @brief Operador menor
+  */
+  bool operator<(const letra& otra) const { return l < otra.l; }
 
-  bool operator>(const letra& otra) const {
-    return l > otra.l;
-  }
+  /**
+  * @brief Operador mayor
+  */
+  bool operator>(const letra& otra) const { return l > otra.l; }
 
-  bool operator==(const letra& otra) const {
-    return l == otra.l;
-  }
-  bool operator!=(const letra& otra) const {
-    return l != otra.l;
-  }
+  /**
+  * @brief Operador de igualdad
+  */
+  bool operator==(const letra& otra) const { return l == otra.l; }
+
+  /**
+  * @brief Operador de desigualdad
+  */
+  bool operator!=(const letra& otra) const { return l != otra.l; }
 };
 
+
+/**
+   @brief T.D.A. Conjunto_Letras
+   \b Definición:
+   Una instancia \e a del tipo de dato abstracto Conjunto_Letras es un
+   conjunto de letras
+   Para poder usar el tipo de dato Conjunto_Letras se debe incluir el fichero
+
+   <tt>\#include letra.h</tt>
+
+   El espacio requerido para el almacenamiento es O(n), donde n es el número
+   de letras.
+*/
 class Conjunto_Letras{
   vector<letra> letras;
 
@@ -38,9 +67,24 @@ public:
   typedef vector<letra>::iterator iterator;
   typedef vector<letra>::const_iterator const_iterator;
 
+  /**
+  * @brief Devuelve un iterador al primer elemento (constante)
+  */
   const_iterator begin() const { return letras.begin(); }
+
+  /**
+  * @brief Devuelve un iterador al siguiente al último elemento (constante)
+  */
   const_iterator end() const { return letras.end(); }
+
+  /**
+  * @brief Devuelve un iterador al primer elemento (no constante)
+  */
   iterator begin() { return letras.begin(); }
+
+  /**
+  * @brief Devuelve un iterador al siguiente al último elemento (no constante)
+  */
   iterator end() { return letras.end(); }
 
   /**
@@ -85,17 +129,44 @@ public:
   unsigned Puntuacion(string palabra) const;
 };
 
+/**
+   @brief T.D.A. Bolsa_Letras
+   \b Definición:
+   Una instancia \e a del tipo de dato abstracto Bolsa_Letras es un vector
+   de letras, posiblemente repetidas.
+   Para poder usar el tipo de dato Bolsa_Letras se debe incluir el fichero
+
+   <tt>\#include letra.h</tt>
+
+   El espacio requerido para el almacenamiento es O(n), donde n es el número
+   de letras.
+*/
 class Bolsa_Letras{
   vector<letra> letras;
 public:
   typedef vector<letra>::iterator iterator;
   typedef vector<letra>::const_iterator const_iterator;
 
+  /**
+  * @brief Devuelve un iterador al primer elemento (constante)
+  */
   const_iterator begin() const { return letras.begin(); }
+
+  /**
+  * @brief Devuelve un iterador al siguiente al último elemento (constante)
+  */
   const_iterator end() const { return letras.end(); }
+
+  /**
+  * @brief Devuelve un iterador al primer elemento (no constante)
+  */
   iterator begin() { return letras.begin(); }
+
+  /**
+  * @brief Devuelve un iterador al siguiente al último elemento (no constante)
+  */
   iterator end() { return letras.end(); }
-  
+
   /**
   * @brief Constructor por defecto
   */
