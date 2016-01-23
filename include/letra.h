@@ -11,7 +11,8 @@ using namespace std;
    @brief T.D.A. Letra
    \b Definición:
    Una instancia \e a del tipo de dato abstracto Letra es una tripleta (l,n,p)
-   donde l es una letra, y n y p enteros positivos (cantidad y puntuación).
+   donde \e l es una letra, y \e n y \e p enteros positivos que representan
+   la cantidad y puntuación.
    Para poder usar el tipo de dato Letra se debe incluir el fichero
 
    <tt>\#include letra.h</tt>
@@ -27,23 +28,23 @@ struct letra{
   letra(char let, int cant, int p):l(let),n(cant),puntos(p){}
 
   /**
-  * @brief Operador menor
-  */
+    * @brief Operador menor
+    */
   bool operator<(const letra& otra) const { return l < otra.l; }
 
   /**
-  * @brief Operador mayor
-  */
+    * @brief Operador mayor
+    */
   bool operator>(const letra& otra) const { return l > otra.l; }
 
   /**
-  * @brief Operador de igualdad
-  */
+    * @brief Operador de igualdad
+    */
   bool operator==(const letra& otra) const { return l == otra.l; }
 
   /**
-  * @brief Operador de desigualdad
-  */
+    * @brief Operador de desigualdad
+    */
   bool operator!=(const letra& otra) const { return l != otra.l; }
 };
 
@@ -52,7 +53,7 @@ struct letra{
    @brief T.D.A. Conjunto_Letras
    \b Definición:
    Una instancia \e a del tipo de dato abstracto Conjunto_Letras es un
-   conjunto de letras
+   conjunto de letras, sin repeticiones.
    Para poder usar el tipo de dato Conjunto_Letras se debe incluir el fichero
 
    <tt>\#include letra.h</tt>
@@ -68,64 +69,64 @@ public:
   typedef vector<letra>::const_iterator const_iterator;
 
   /**
-  * @brief Devuelve un iterador al primer elemento (constante)
-  */
+    * @brief Devuelve un iterador al primer elemento (constante)
+    */
   const_iterator begin() const { return letras.begin(); }
 
   /**
-  * @brief Devuelve un iterador al siguiente al último elemento (constante)
-  */
+    * @brief Devuelve un iterador al siguiente al último elemento (constante)
+    */
   const_iterator end() const { return letras.end(); }
 
   /**
-  * @brief Devuelve un iterador al primer elemento (no constante)
-  */
+    * @brief Devuelve un iterador al primer elemento (no constante)
+    */
   iterator begin() { return letras.begin(); }
 
   /**
-  * @brief Devuelve un iterador al siguiente al último elemento (no constante)
-  */
+    * @brief Devuelve un iterador al siguiente al último elemento (no constante)
+    */
   iterator end() { return letras.end(); }
 
   /**
-  * @brief Obtiene el iterador a una letra o donde debería insertarse
-  */
+    * @brief Obtiene el iterador a una letra o donde debería insertarse
+    */
   inline iterator DondeIria(char c);
 
   /**
-  * @brief Obtiene el iterador constante a una letra o donde debería insertarse
-  */
+    * @brief Obtiene el iterador constante a una letra o donde debería insertarse
+    */
   inline const_iterator DondeIria(char c) const;
 
   /**
-  * @brief Obtiene el iterador a una letra o end() si no está
-  */
+    * @brief Obtiene el iterador a una letra o end() si no está
+    */
   iterator Encuentra(char c);
 
   /**
-  * @brief Obtiene el iterador constante a una letra o end() si no está
-  */
+    * @brief Obtiene el iterador constante a una letra o end() si no está
+    */
   const_iterator Encuentra(char c) const;
 
   /**
-  * @brief Operador de lectura
-  */
+    * @brief Operador de lectura
+    */
   friend istream & operator>>(istream & is, Conjunto_Letras & C);
 
   /**
-  * @brief Operador de escritura
-  */
+    * @brief Operador de escritura
+    */
   friend ostream & operator<<(ostream & os, const Conjunto_Letras & C);
 
   /**
-  * @brief Añade una letra al conjunto
-  */
+    * @brief Añade una letra al conjunto
+    */
   void Add(char l, int n, int puntos);
 
   /**
-  * @brief Obtiene la puntuación de una palabra
-  * @pre La palabra es correcta
-  */
+    * @brief Obtiene la puntuación de una palabra
+    * @pre La palabra es correcta (todo caracter es una letra del conjunto)
+    */
   unsigned Puntuacion(string palabra) const;
 };
 
@@ -148,53 +149,53 @@ public:
   typedef vector<letra>::const_iterator const_iterator;
 
   /**
-  * @brief Devuelve un iterador al primer elemento (constante)
-  */
+    * @brief Devuelve un iterador al primer elemento (constante)
+    */
   const_iterator begin() const { return letras.begin(); }
 
   /**
-  * @brief Devuelve un iterador al siguiente al último elemento (constante)
-  */
+    * @brief Devuelve un iterador al siguiente al último elemento (constante)
+    */
   const_iterator end() const { return letras.end(); }
 
   /**
-  * @brief Devuelve un iterador al primer elemento (no constante)
-  */
+    * @brief Devuelve un iterador al primer elemento (no constante)
+    */
   iterator begin() { return letras.begin(); }
 
   /**
-  * @brief Devuelve un iterador al siguiente al último elemento (no constante)
-  */
+    * @brief Devuelve un iterador al siguiente al último elemento (no constante)
+    */
   iterator end() { return letras.end(); }
 
   /**
-  * @brief Constructor por defecto
-  */
+    * @brief Constructor por defecto
+    */
   Bolsa_Letras(){}
 
   /**
-  * @brief Construye una bolsa completa a partir de c
-  */
+    * @brief Construye una bolsa completa a partir de c
+    */
   Bolsa_Letras(Conjunto_Letras &c);
 
   /**
-  * @brief Construye una bolsa de tamaño tam a partir de c
-  */
+    * @brief Construye una bolsa de tamaño tam a partir de c
+    */
   Bolsa_Letras(Conjunto_Letras &c, int tam);
 
   /**
-  * @brief Devuelve el número de elementos
-  */
+    * @brief Devuelve el número de elementos
+    */
   int Cantidad() const;
 
   /**
-  * @brief Obtiene un subconjunto al azar
-  */
+    * @brief Obtiene un subconjunto al azar
+    */
   vector<letra> MuestraAleatoria(int tam) const;
 
   /**
-  * @brief Localiza la primera aparición de una letra por su caracter o devuelve end() si no está
-  */
+    * @brief Localiza la primera aparición de una letra por su caracter o devuelve end() si no está
+    */
   const_iterator Encuentra(char c) const;
 };
 
