@@ -48,6 +48,11 @@ class Diccionario{
 
   /**
     * @brief Método auxiliar para MejoresSoluciones
+    * @param disponibles Letras que se pueden escoger
+    * @param cl Puntero a conjunto de letras con puntuaciones (si se quiere longitud, debe ser 0)
+    * @param prev Nodo padre de los nodos que deben explorarse
+    * @param salida Referencia donde se guardan las soluciones
+    * @param mejor Referencia a la mayor puntuación encontrada
     * @see MejoresSoluciones
     */   
   void RellenaSoluciones(const vector<letra> &disponibles, const Conjunto_Letras* cl, ArbolGeneral<info>::Nodo prev, vector<string>& salida, int &mejor) const;
@@ -74,7 +79,7 @@ public:
 
   /**
     * @brief Obtiene las mejores soluciones
-    * @param bl Letras que se pueden escoger
+    * @param disponibles Letras que se pueden escoger
     * @param cl Puntero a conjunto de letras con puntuaciones (si se quiere longitud, puede omitirse)
     * @pre disponibles está ordenado
     * @return Un vector con las mejores soluciones
