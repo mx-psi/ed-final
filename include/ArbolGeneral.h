@@ -40,11 +40,18 @@ class ArbolGeneral{
   *
   * @section invConjunto Invariante de la representación
   *
-  * Añadir el invariante de la representación
+  * La invariante de representación es que no existen recorridos cerrados entre
+  * los nodos.
   *
   * @section faConjunto Función de abstracción
   *
-  * Añadir la función de abstracción
+  * Un objeto válido `laraiz` representa:
+  *
+  * - Si `laraiz == 0`, representa un árbol vacío
+  * - Si `laraiz != 0`, representa al árbol con valor en la raiz `laraiz->etiqueta`
+  * y hijos todos los árboles de la lista simplemente enlazada indicada por
+  * `laraiz->izqda`.
+  *
   */
 
   private:
