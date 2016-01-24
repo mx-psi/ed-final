@@ -86,8 +86,8 @@ ArbolGeneral<T>::~ArbolGeneral(){
 template <class T>
 ArbolGeneral<T>& ArbolGeneral<T>::operator=(const ArbolGeneral<T> &v){
   if(this != &v){
-  destruir(laraiz);
-  copiar(laraiz,v.laraiz);
+    destruir(laraiz);
+    copiar(laraiz, v.laraiz);
   }
 }
 
@@ -147,7 +147,7 @@ int ArbolGeneral<T>::nivel(const typename ArbolGeneral<T>::Nodo n) const{
 
 template <class T>
 void ArbolGeneral<T>::asignar_subarbol(const ArbolGeneral<T>& orig, const typename ArbolGeneral<T>::Nodo nod){
- orig.copiar(laraiz,nod); // laraiz se destruye en copiar
+  orig.copiar(laraiz,nod); // laraiz se destruye en copiar
 }
 
 template <class T>
@@ -207,9 +207,6 @@ bool ArbolGeneral<T>::operator!=(const ArbolGeneral<T>& v) const{
 /* Iterador preorden no constante */
 
 template <class T>
-ArbolGeneral<T>::iter_preorden::iter_preorden():it(0),raiz(0),level(-1){}
-
-template <class T>
 T & ArbolGeneral<T>::iter_preorden::operator*(){
   return it->etiqueta;
 }
@@ -230,10 +227,7 @@ typename ArbolGeneral<T>::iter_preorden & ArbolGeneral<T>::iter_preorden::operat
       it = it->padre;
       level--;
     }
-    if (it->padre == 0)
-      it = 0;
-    else
-      it = it->drcha;
+    it = it->drcha;  // Esto funciona tanto si padre es 0 como si hermano no es 0
   }
   return *this;
 }
@@ -251,9 +245,6 @@ bool ArbolGeneral<T>::iter_preorden::operator!=(const typename ArbolGeneral<T>::
 /* Iterador preorden constante */
 
 template <class T>
-ArbolGeneral<T>::const_iter_preorden::const_iter_preorden():it(0),raiz(0),level(-1){}
-
-template <class T>
 const T & ArbolGeneral<T>::const_iter_preorden::operator*(){
   return it->etiqueta;
 }
@@ -269,18 +260,12 @@ typename ArbolGeneral<T>::const_iter_preorden & ArbolGeneral<T>::const_iter_preo
     it = it->izqda;
     level++;
   }
-  else if (it->drcha != 0)
-    it = it->drcha;
-
   else {
-    while (it->padre != 0 && it->padre->drcha == 0){
+    while (it->padre != 0 && it->drcha == 0){
       it = it->padre;
       level--;
     }
-    if (it->padre == 0)
-      it = 0;
-    else
-      it = it->padre->drcha;
+    it = it->drcha;  // Esto funciona tanto si padre es 0 como si hermano no es 0
   }
   return *this;
 }

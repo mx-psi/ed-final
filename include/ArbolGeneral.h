@@ -489,7 +489,7 @@ class ArbolGeneral{
         * @brief Constructor por defecto
         *
         */
-      iter_preorden();
+      iter_preorden():it(0),raiz(0),level(-1){};
 
       /**
         * @brief Constructor a partir de nodo
@@ -549,7 +549,13 @@ class ArbolGeneral{
         * @brief Constructor por defecto
         *
         */
-      const_iter_preorden();
+      const_iter_preorden():it(0),raiz(0),level(-1){};
+
+      /**
+        * @brief Constructor a partir de nodo
+        *
+        */
+      const_iter_preorden(const Nodo n):it(n),raiz(0),level(-1){}
 
       /**
         * @brief Obtiene la etiqueta del nodo
