@@ -36,21 +36,24 @@ using namespace std;
 template <class Tbase>
 class ArbolGeneral{
 /**
-  * @page repConjunto Rep del TDA Arbol General
+  * @page repArbolGeneral Rep del TDA Arbol General
   *
-  * @section invConjunto Invariante de la representación
+  * @section invArbolGeneral Invariante de la representación
   *
-  * La invariante de representación es que no existen recorridos cerrados entre
-  * los nodos.
+  * El invariante de representación es que cualquier par
+  * de nodos tiene un único camino que va de un nodo a
+  * otro sin repetir ningún nodo. Es decir, todo par de
+  * nodos está conectado y no hay ciclos.
   *
-  * @section faConjunto Función de abstracción
+  * @section faArbolGeneral Función de abstracción
   *
   * Un objeto válido `laraiz` representa:
   *
   * - Si `laraiz == 0`, representa un árbol vacío
-  * - Si `laraiz != 0`, representa al árbol con valor en la raiz `laraiz->etiqueta`
-  * y hijos todos los árboles de la lista simplemente enlazada indicada por
-  * `laraiz->izqda`.
+  * - Si `laraiz != 0`, representa al árbol con
+  * `laraiz->etiqueta` como etiqueta de la raíz y con 
+  * todos los árboles de la lista enlazada a partir de
+  * `laraiz->izqda` como hijos.
   *
   */
 

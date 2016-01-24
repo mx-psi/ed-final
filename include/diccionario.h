@@ -30,6 +30,25 @@ struct info{
    donde n es el número de palabras.
 */
 class Diccionario{
+/**
+  * @page repDiccionario Rep del TDA Diccionario
+  *
+  * @section invDiccionario Invariante de la representación
+  *
+  * El invariante de representación es que todo nodo sin hijos
+  * es necesariamente fin de palabra y no hay nodos hijos del
+  * mismo padre cuyo caracter sea el mismo.
+  *
+  * @section faDiccionario Función de abstracción
+  *
+  * Un objeto válido `d` representa un árbol cuyos nodos
+  * son las letras de cada palabra. Dos palabras cuyas
+  * `n` primeras letras sean las mismas tendrán en común
+  * los `n` primeros nodos.
+  *
+  */
+
+private:
   /**
     * @brief Árbol de datos
     *

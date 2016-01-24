@@ -64,6 +64,22 @@ struct letra{
    de letras.
 */
 class Conjunto_Letras{
+/**
+  * @page repConjuntoLetras Rep del TDA Conjunto_Letras
+  *
+  * @section invConjuntoLetras Invariante de la representación
+  *
+  * El invariante de representación es que no hay letras cuyo
+  * caracter coincida.
+  *
+  * @section faConjuntoLetras Función de abstracción
+  *
+  * Un objeto válido representa un conjunto de elementos del tipo
+  * Letra.
+  *
+  */
+
+private:
   vector<letra> letras;
 
 public:
@@ -145,7 +161,28 @@ public:
    de letras.
 */
 class Bolsa_Letras{
+/**
+  * @page repBolsa Rep del TDA Bolsa_Letras
+  *
+  * @section invBolsa Invariante de la representación
+  *
+  * El invariante de representación es que, para todo par de
+  * letras `a`, `b` de la bolsa cuyo caracter sea el mismo,
+  * `a` y `b` son completamente idénticas (también coinciden en
+  * el resto de sus datos) y toda letra `c` que ocupe una
+  * posición intermedia a la de ambas será completamente idéntica
+  * a estas.
+  *
+  * @section faBolsa Función de abstracción
+  *
+  * Un objeto válido representa un Conjunto_Letras en el que
+  * cada letra `l` aparece tantas veces como indica `l.n`.
+  *
+  */
+
+private:
   vector<letra> letras;
+
 public:
   typedef vector<letra>::iterator iterator;
   typedef vector<letra>::const_iterator const_iterator;
