@@ -8,16 +8,10 @@ int Diccionario::size() const{
 }
 
 void Diccionario::PalabrasLong(int longitud, ArbolGeneral<info>::Nodo n, vector<string> &v) const{
-  if(longitud == 1){
+  if(longitud == 1) {
     for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))
-      if(datos.etiqueta(m).final){
-        string palabra;
-
-        for(ArbolGeneral<info>::Nodo k = m; datos.padre(k) != 0; k = datos.padre(k))
-          palabra = datos.etiqueta(k).c + palabra;
-
-        v.push_back(palabra);
-      }
+      if(datos.etiqueta(m).final)
+        v.push_back(Get(m));
   }
   else
     for(ArbolGeneral<info>::Nodo m = datos.hijomasizquierda(n); m != 0; m = datos.hermanoderecha(m))

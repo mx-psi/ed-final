@@ -89,6 +89,12 @@ public:
   /**
     * @brief Obtiene la cadena de una palabra
     * @param n Nodo en el que termina la palabra
+    *
+    * Obtiene la cadena formada por un nodo y su
+    * ascendencia hasta la raíz. Si se usa en un
+    * nodo en el que concluye una palabra, se obtiene
+    * esa palabra. Puede usarse en un nodo en el que
+    * no termina ninguna palabra.
     */
   string Get(const ArbolGeneral<info>::Nodo& n) const;
 
