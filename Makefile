@@ -1,3 +1,4 @@
+# Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
 SRC = src
 INC = include
 OBJ = obj

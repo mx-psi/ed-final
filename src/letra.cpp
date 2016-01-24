@@ -1,3 +1,5 @@
+// Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
+
 Conjunto_Letras::iterator Conjunto_Letras::DondeIria(char c) {
   return lower_bound(letras.begin(), letras.end(), letra(c, 0, 0));
 }

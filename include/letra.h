@@ -1,3 +1,5 @@
+// Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
+
 #ifndef __Letra_h__
 #define __Letra_h__
 

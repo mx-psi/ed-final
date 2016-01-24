@@ -1,3 +1,5 @@
+// Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
+
 int Diccionario::size() const{
   int n = 0;
   for(ArbolGeneral<info>::const_iter_preorden it = datos.begin(); it != datos.end(); ++it)
@@ -66,7 +68,7 @@ void Diccionario::RellenaSoluciones(const vector<letra> &disponibles, const Conj
         RellenaSoluciones(subletras, cl, n, salida, mejor);
       }
     }
-  
+
     letra last = *i;
     do {
       ++i;

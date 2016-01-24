@@ -1,3 +1,5 @@
+// Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
+
 #ifndef __Diccionario_h__
 #define __Diccionario_h__
 

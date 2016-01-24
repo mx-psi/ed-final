@@ -1,3 +1,5 @@
+// Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
+
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -68,7 +70,7 @@ int main(int argc, char * argv[]){
   char s_j;
   Bolsa_Letras bl(cl);
   srand(time(0));
-  
+
   do{
     vector<letra> disponibles, disponibles_ordenadas;
     vector<string> sols;

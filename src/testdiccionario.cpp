@@ -1,3 +1,5 @@
+// Autores: Pablo Baeyens Fernández y José Manuel Muñoz Fuentes
+
 #include <fstream>
 #include <iostream>
 #include <string>
